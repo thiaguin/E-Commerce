@@ -11,6 +11,7 @@ const metadata: ModuleMetadata = {
     controllers: [ProductsController],
     exports: [],
 }
+
 @Module(metadata)
 export class ProductsModule implements NestModule {
     public configure(consumer: MiddlewareConsumer) {}

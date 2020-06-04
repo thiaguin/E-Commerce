@@ -10,5 +10,6 @@ const metadata: ModuleMetadata = {
     controllers: [ProductsController],
     providers: [ProductsService],
 }
+
 @Module(metadata)
 export class AppModule {}
