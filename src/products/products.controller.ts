@@ -17,7 +17,7 @@ export class ProductsController {
     }
 
     @Post()
-    create(@Body() CreateProductDto: CreateProductDto): Promise<Product[]> {
+    create(@Body() CreateProductDto: CreateProductDto): Promise<Product> {
         return this.productService.create(CreateProductDto)
     }
 }
