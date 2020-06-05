@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseInterceptors, UploadedFile, Param } from '@nestjs/common'
+import { Controller, Post, Body, UseInterceptors, UploadedFile, Param, Get, Res } from '@nestjs/common'
 import { PhotosService } from './photos.service'
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { diskStorage } from 'multer'
@@ -7,7 +7,7 @@ import { v4 as uuid } from 'uuid'
 import { CreatePhotoDTO } from './dto/create-photos.dto'
 import { ProductParamsDTO } from './dto/product-params.dto'
 import { Photo } from './photos.entity'
-
+import { Response } from 'express'
 @Controller('photos')
 export class PhotosController {
     private photoService: PhotosService
@@ -16,16 +16,27 @@ export class PhotosController {
         this.photoService = new PhotosService()
     }
 
+    @Get('/:id')
+    async get(@Param() params: { id: number }, @Res() res: Response): Promise<void> {
+        return this.photoService.get(params, res)
+    }
+
+    @Get('/datas/:productId')
+    async getImagesData(@Param() params: ProductParamsDTO) {
+        return this.photoService.getImagesData(params)
+    }
+
     @Post('upload/:productId')
     @UseInterceptors(
         FilesInterceptor('images', 15, {
             storage: diskStorage({
-                destination: path.resolve('..', 'backend', 'pictures'),
+                destination: path.resolve('..'),
                 filename: (req, file, cb) => {
-                    const uuidGenerate = uuid()
-                    const newName = `${uuidGenerate}${path.extname(file.originalname)}`
+                    const newName = uuid()
+                    const filename = `${newName}${path.extname(file.originalname)}`
                     const { body } = req
-                    body.files = body.files ? [...body.files, newName] : newName
+                    const photo = { filename, originalName: file.originalname }
+                    body.files = body.files ? [...body.files, photo] : [photo]
                     cb(null, newName)
                 },
             }),

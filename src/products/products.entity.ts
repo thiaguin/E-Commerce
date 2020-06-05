@@ -7,7 +7,6 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     JoinColumn,
-    Unique,
 } from 'typeorm'
 import { Photo } from '../photos/photos.entity'
 import { Brand } from '../brands/brands.entity'
@@ -27,7 +26,7 @@ export class Product {
     description: string
 
     @Column('json', { nullable: true })
-    technicalInformation: string
+    technicalInformation: JSON
 
     @Column('integer')
     @IsDefined()
@@ -48,11 +47,11 @@ export class Product {
     @Column('integer', { default: 0 })
     discount: number
 
-    @ManyToOne(() => Brand, (brand) => brand.id)
+    @ManyToOne(() => Brand, (brand) => brand.id, { nullable: false })
     @JoinColumn()
     brand: Brand
 
-    @ManyToOne(() => Category, (category) => category.id)
+    @ManyToOne(() => Category, (category) => category.id, { nullable: false })
     @JoinColumn()
     category: Category
 

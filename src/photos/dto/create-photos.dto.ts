@@ -1,3 +1,8 @@
+type Photo = {
+    filename: string
+    originalName: string
+}
 export class CreatePhotoDTO {
-    files: string[]
+    files: Photo[]
+    main?: string
 }

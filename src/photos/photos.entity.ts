@@ -23,6 +23,9 @@ export class Photo {
     @JoinColumn()
     product: Product
 
+    @Column('boolean', { default: false })
+    isMain: boolean
+
     @CreateDateColumn({ type: 'timestamp with time zone' })
     createdAt: string
 
