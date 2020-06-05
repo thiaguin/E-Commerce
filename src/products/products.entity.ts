@@ -1,6 +1,18 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    OneToMany,
+    ManyToOne,
+    CreateDateColumn,
+    UpdateDateColumn,
+    JoinColumn,
+    Unique,
+} from 'typeorm'
 import { Photo } from '../photos/photos.entity'
+import { Brand } from '../brands/brands.entity'
 import { IsDefined } from 'class-validator'
+import { Category } from 'src/categories/categories.entity'
 
 @Entity()
 export class Product {
@@ -36,11 +48,15 @@ export class Product {
     @Column('integer', { default: 0 })
     discount: number
 
-    //TODO: change to association
-    @Column()
-    brand: string
+    @ManyToOne(() => Brand, (brand) => brand.id)
+    @JoinColumn()
+    brand: Brand
 
-    @OneToMany((type) => Photo, (photo) => photo.id)
+    @ManyToOne(() => Category, (category) => category.id)
+    @JoinColumn()
+    category: Category
+
+    @OneToMany(() => Photo, (photo) => photo.product)
     photos: Photo[]
 
     @CreateDateColumn({ type: 'timestamp with time zone' })

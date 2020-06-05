@@ -4,24 +4,23 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
-    ManyToOne,
+    OneToMany,
     JoinColumn,
 } from 'typeorm'
 import { IsDefined } from 'class-validator'
-import { Product } from 'src/products/products.entity'
+import { Category } from 'src/categories/categories.entity'
 
 @Entity()
-export class Photo {
+export class Department {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column('text')
+    @Column()
     @IsDefined()
-    filename: string
+    name: string
 
-    @ManyToOne(() => Product, (product) => product.id)
-    @JoinColumn()
-    product: Product
+    @OneToMany(() => Category, (category) => category.department)
+    categories: Category[]
 
     @CreateDateColumn({ type: 'timestamp with time zone' })
     createdAt: string

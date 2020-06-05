@@ -1,15 +1,11 @@
-type Brand = {
-    id: number
-}
 export class CreateProductDto {
-    title: string
+    title?: string
     description?: string
     technicalInformation?: string
-    price: number
+    price?: number
     rating?: number
     ratingQuantity?: number
     stockQuantity?: number
     saleQuantity?: number
     discount?: number
-    brand: Brand
 }
