@@ -30,14 +30,14 @@ export class PhotosController {
     @UseInterceptors(
         FilesInterceptor('images', 15, {
             storage: diskStorage({
-                destination: path.resolve('..'),
+                destination: path.resolve('..', 'backend', 'pictures'),
                 filename: (req, file, cb) => {
                     const newName = uuid()
                     const filename = `${newName}${path.extname(file.originalname)}`
                     const { body } = req
                     const photo = { filename, originalName: file.originalname }
                     body.files = body.files ? [...body.files, photo] : [photo]
-                    cb(null, newName)
+                    cb(null, filename)
                 },
             }),
         })

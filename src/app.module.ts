@@ -6,9 +6,20 @@ import { BrandsModule } from './brands/brands.module'
 import { DepartmentsModule } from './departments/departments.module'
 import { CategoriesModule } from './categories/categories.module'
 import { PhotosModule } from './photos/photos.module'
+import { UsersModule } from './users/users.module'
+import { AuthModule } from './auth/auth.module'
 
 const metadata: ModuleMetadata = {
-    imports: [TypeOrmModule.forRoot(), ProductsModule, BrandsModule, DepartmentsModule, CategoriesModule, PhotosModule],
+    imports: [
+        TypeOrmModule.forRoot(),
+        ProductsModule,
+        BrandsModule,
+        DepartmentsModule,
+        CategoriesModule,
+        PhotosModule,
+        UsersModule,
+        AuthModule,
+    ],
     controllers: [],
     providers: [],
 }
