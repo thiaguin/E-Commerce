@@ -10,8 +10,8 @@ import {
 } from 'typeorm'
 import { Photo } from '../photos/photos.entity'
 import { Brand } from '../brands/brands.entity'
-import { IsDefined } from 'class-validator'
 import { Category } from 'src/categories/categories.entity'
+import { ProductOrder } from 'src/productOrder/productOrder.entity'
 
 @Entity()
 export class Product {
@@ -19,7 +19,6 @@ export class Product {
     id: number
 
     @Column({ unique: true })
-    @IsDefined()
     title: string
 
     @Column('text', { nullable: true })
@@ -29,7 +28,6 @@ export class Product {
     technicalInformation: JSON
 
     @Column('integer')
-    @IsDefined()
     price: number
 
     @Column('integer', { default: 0 })
@@ -54,6 +52,9 @@ export class Product {
     @ManyToOne(() => Category, (category) => category.id, { nullable: false })
     @JoinColumn()
     category: Category
+
+    @OneToMany(() => ProductOrder, (productOrder) => productOrder.product)
+    productOrder: ProductOrder[]
 
     @OneToMany(() => Photo, (photo) => photo.product)
     photos: Photo[]

@@ -17,7 +17,7 @@ export class User {
     @Column({ unique: true })
     username: string
 
-    @Column()
+    @Column({ select: false })
     password: string
 
     @Column({ enum: ['CLIENT', 'ADMIN'], default: 'CLIENT' })

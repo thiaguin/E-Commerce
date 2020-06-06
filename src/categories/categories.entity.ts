@@ -7,7 +7,6 @@ import {
     ManyToOne,
     JoinColumn,
 } from 'typeorm'
-import { IsDefined } from 'class-validator'
 import { Department } from 'src/departments/departments.entity'
 
 @Entity()
@@ -16,7 +15,6 @@ export class Category {
     id: number
 
     @Column()
-    @IsDefined()
     name: string
 
     @ManyToOne(() => Department, (department) => department.id)

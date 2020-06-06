@@ -7,7 +7,6 @@ import {
     ManyToOne,
     JoinColumn,
 } from 'typeorm'
-import { IsDefined } from 'class-validator'
 import { Product } from 'src/products/products.entity'
 
 @Entity()
@@ -16,7 +15,6 @@ export class Photo {
     id: number
 
     @Column('text')
-    @IsDefined()
     filename: string
 
     @ManyToOne(() => Product, (product) => product.id)

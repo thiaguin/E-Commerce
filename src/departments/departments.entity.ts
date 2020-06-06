@@ -5,9 +5,7 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     OneToMany,
-    JoinColumn,
 } from 'typeorm'
-import { IsDefined } from 'class-validator'
 import { Category } from 'src/categories/categories.entity'
 
 @Entity()
@@ -16,7 +14,6 @@ export class Department {
     id: number
 
     @Column()
-    @IsDefined()
     name: string
 
     @OneToMany(() => Category, (category) => category.department)

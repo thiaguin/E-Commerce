@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
-import { IsDefined } from 'class-validator'
 
 @Entity()
 export class Brand {
@@ -7,7 +6,6 @@ export class Brand {
     id: number
 
     @Column()
-    @IsDefined()
     name: string
 
     @CreateDateColumn({ type: 'timestamp with time zone' })
