@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common'
 import { ProductsService } from './products.service'
 import { Product } from './products.entity'
 import { CreateProductDto } from './dto/create-product.dto'
-import * as path from 'path'
 
 @Controller('products')
 export class ProductsController {

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { getManager } from 'typeorm'
 import { Photo } from './photos.entity'
-import { Product } from 'src/products/products.entity'
 import { ProductParamsDTO } from './dto/product-params.dto'
 import { CreatePhotoDTO } from './dto/create-photos.dto'
 import { Response } from 'express'
@@ -19,7 +18,7 @@ export class PhotosService {
     async uploadPhoto(body: CreatePhotoDTO, params: ProductParamsDTO): Promise<Photo[]> {
         const photoRepository = getManager().getRepository(Photo)
         const promises = []
-        console.log(body)
+
         for (const file of body.files) {
             const { filename, originalName } = file
             const isMain = body.main ? body.main === originalName : false

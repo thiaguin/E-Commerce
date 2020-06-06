@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { Department } from './departments.entity'
 import { DepartmentsService } from './departments.service'
 import { DepartmentsController } from './departments.controller'
-import { Repository } from 'typeorm'
 
 const metadata: ModuleMetadata = {
     imports: [TypeOrmModule.forFeature([Department])],

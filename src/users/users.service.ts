@@ -2,7 +2,6 @@ import { Injectable, HttpException } from '@nestjs/common'
 import { getManager } from 'typeorm'
 import { User } from './users.entity'
 import { CreateUserDTO } from './dto/create-user.dto'
-import { PayloadUserDTO } from './dto/payload-user.dto'
 
 @Injectable()
 export class UsersService {

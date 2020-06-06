@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common'
 import { getManager, TransactionManager } from 'typeorm'
 import { Order } from './orders.entity'
 import { Product } from 'src/products/products.entity'
-import { CreateProductOrderDTO } from 'src/productOrder/dto/create-productOrder.dto'
 import { CreateOrderDTO } from './dto/create-order.dto'
 import { ProductOrder } from 'src/productOrder/productOrder.entity'
 

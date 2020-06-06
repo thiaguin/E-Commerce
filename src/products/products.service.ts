@@ -1,6 +1,6 @@
 import { Injectable, HttpException } from '@nestjs/common'
 import { Product } from './products.entity'
-import { getManager, Repository } from 'typeorm'
+import { getManager } from 'typeorm'
 import { CreateProductDto } from './dto/create-product.dto'
 
 @Injectable()

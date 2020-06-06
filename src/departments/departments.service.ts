@@ -3,7 +3,6 @@ import { getManager, UpdateResult } from 'typeorm'
 import { Department } from './departments.entity'
 import { CreateDepartmentDTO } from './dto/create-departments.dto'
 import { UpdateDepartmentDTO } from './dto/update-departments.dto'
-import { Category } from 'src/categories/categories.entity'
 
 @Injectable()
 export class DepartmentsService {

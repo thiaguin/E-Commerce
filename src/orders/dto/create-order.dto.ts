@@ -1,4 +1,3 @@
-import { CreateProductOrderDTO } from 'src/productOrder/dto/create-productOrder.dto'
 type User = {
     id: number
 }
