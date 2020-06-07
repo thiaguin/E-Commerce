@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+    pgadmin4:
+        image: dpage/pgadmin4
+        container_name: pgadmin4
+        ports:
+            - '15432:80'
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=ecommerce@mail.com
+            - PGADMIN_DEFAULT_PASSWORD=pwd2020
+        depends_on:
+            - e-postgres
+        networks:
+            - e-network
+
+    e-postgres:
+        image: 'postgres'
+        container_name: e-postgres
+        environment:
+            - POSTGRES_USER=e-username
+            - POSTGRES_PASSWORD=pwd2020
+        ports:
+            - '54320:5432'
+        volumes:
+            - ./data/postgres/database
+        networks:
+            - e-network
+
+networks:
+    e-network:
+        driver: bridge

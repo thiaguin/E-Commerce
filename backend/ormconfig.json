@@ -1,8 +1,8 @@
 {
     "type": "postgres",
-    "host": "172.17.0.2",
-    "port": 5432,
-    "username": "postgres",
+    "host": "localhost",
+    "port": 54320,
+    "username": "e-username",
     "password": "pwd2020",
     "database": "dev",
     "synchronize": true,
