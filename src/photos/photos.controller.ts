@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseInterceptors, Param, Get, Res } from '@nestjs/common'
+import { Controller, Post, Body, UseInterceptors, Param, Get, Res, HttpException } from '@nestjs/common'
 import { PhotosService } from './photos.service'
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { diskStorage } from 'multer'
@@ -8,6 +8,7 @@ import { CreatePhotoDTO } from './dto/create-photos.dto'
 import { ProductParamsDTO } from './dto/product-params.dto'
 import { Photo } from './photos.entity'
 import { Response } from 'express'
+import { throwError } from 'rxjs'
 @Controller('photos')
 export class PhotosController {
     private photoService: PhotosService
@@ -33,11 +34,19 @@ export class PhotosController {
                 destination: path.resolve('..', 'backend', 'pictures'),
                 filename: (req, file, cb) => {
                     const newName = uuid()
-                    const filename = `${newName}${path.extname(file.originalname)}`
+                    const extension = path.extname(file.originalname)
+                    const filename = `${newName}${extension}`
                     const { body } = req
                     const photo = { filename, originalName: file.originalname }
+                    const extesionsAllowed = ['.gif', '.jpg', '.jpeg', '.tiff', '.png']
+
                     body.files = body.files ? [...body.files, photo] : [photo]
-                    cb(null, filename)
+
+                    if (extesionsAllowed.includes(extension)) {
+                        cb(null, filename)
+                    } else {
+                        cb(new Error(), 'false')
+                    }
                 },
             }),
         })

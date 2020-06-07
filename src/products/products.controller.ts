@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common'
+import { Controller, Get, Post, Body, Param, Query, Req } from '@nestjs/common'
 import { ProductsService } from './products.service'
 import { Product } from './products.entity'
 import { CreateProductDto } from './dto/create-product.dto'
+import { SelectQueryBuilder } from 'typeorm'
 
 @Controller('products')
 export class ProductsController {
@@ -17,12 +18,17 @@ export class ProductsController {
     }
 
     @Get()
-    findAll(): Promise<Product[]> {
-        return this.productService.findAll()
+    findAll(@Query() query): Promise<{ products: Product[]; count: number }> {
+        return this.productService.findAll(query)
     }
 
     @Post()
     create(@Body() body: CreateProductDto): Promise<Product> {
         return this.productService.create(body)
+    }
+
+    @Post('evaluate/:id')
+    evaluate(@Param() params, @Body() body, @Req() req) {
+        return this.productService.evaluate(params, body, req.user)
     }
 }

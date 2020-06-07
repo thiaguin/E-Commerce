@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Put, Body, Param } from '@nestjs/common'
+import { Controller, Post, Get, Put, Body, Param, HttpCode } from '@nestjs/common'
 import { BrandsService } from './brands.service'
 import { Brand } from './brands.entity'
 import { CreateBrandDTO } from './dto/create-brands.dto'
@@ -23,7 +23,8 @@ export class BrandsController {
         return this.brandService.create(body)
     }
 
-    @Put()
+    @Put(':id')
+    @HttpCode(204)
     update(@Body() body: UpdateBrandDTO, @Param() params: { id: number }): Promise<UpdateResult> {
         return this.brandService.update(body, params)
     }

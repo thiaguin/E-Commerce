@@ -7,6 +7,9 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     JoinColumn,
+    OneToOne,
+    BeforeInsert,
+    BeforeUpdate,
 } from 'typeorm'
 import { Photo } from '../photos/photos.entity'
 import { Brand } from '../brands/brands.entity'
@@ -39,13 +42,16 @@ export class Product {
     @Column('integer', { default: 0 })
     stockQuantity: number
 
+    @Column('boolean')
+    hasStock: boolean
+
     @Column('integer', { default: 0 })
     saleQuantity: number
 
     @Column('integer', { default: 0 })
     discount: number
 
-    @ManyToOne(() => Brand, (brand) => brand.id, { nullable: false })
+    @ManyToOne(() => Brand, (brand) => brand.id, { nullable: false, cascade: true })
     @JoinColumn()
     brand: Brand
 
@@ -59,9 +65,18 @@ export class Product {
     @OneToMany(() => Photo, (photo) => photo.product)
     photos: Photo[]
 
+    @ManyToOne(() => Photo, (photo) => photo.id, { nullable: true })
+    photo: Photo
+
     @CreateDateColumn({ type: 'timestamp with time zone' })
     createdAt: string
 
     @UpdateDateColumn({ type: 'timestamp with time zone' })
     updatedAt: number
+
+    @BeforeInsert()
+    @BeforeUpdate()
+        updateHasStock() {
+        this.hasStock = this.stockQuantity > 0
+    }
 }

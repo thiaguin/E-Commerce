@@ -6,6 +6,7 @@ import {
     UpdateDateColumn,
     ManyToOne,
     JoinColumn,
+    OneToOne,
 } from 'typeorm'
 import { Product } from 'src/products/products.entity'
 
@@ -20,9 +21,6 @@ export class Photo {
     @ManyToOne(() => Product, (product) => product.id)
     @JoinColumn()
     product: Product
-
-    @Column('boolean', { default: false })
-    isMain: boolean
 
     @CreateDateColumn({ type: 'timestamp with time zone' })
     createdAt: string

@@ -37,7 +37,10 @@ export class AuthService {
 
     async login(body: LoginUserDTO): Promise<ResultAuthDTO> {
         const userRepository = getManager().getRepository(User)
-        const user = await userRepository.findOne({ where: { username: body.username } })
+        const user = await userRepository.findOne({
+            where: { username: body.username },
+            select: ['id', 'username', 'role', 'password'],
+        })
 
         if (user) {
             if (bcrypt.compareSync(body.password, user.password)) {
