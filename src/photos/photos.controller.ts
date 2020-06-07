@@ -8,7 +8,6 @@ import { CreatePhotoDTO } from './dto/create-photos.dto'
 import { ProductParamsDTO } from './dto/product-params.dto'
 import { Photo } from './photos.entity'
 import { Response } from 'express'
-import { throwError } from 'rxjs'
 @Controller('photos')
 export class PhotosController {
     private photoService: PhotosService

@@ -1,8 +1,6 @@
 import { Controller, Post, Body, Get, Param, Req } from '@nestjs/common'
 import { OrdersService } from './orders.service'
 import { Order } from './orders.entity'
-import { PayloadUserDTO } from 'src/users/dto/payload-user.dto'
-import { User } from 'src/users/users.entity'
 
 @Controller('orders')
 export class OrdersController {

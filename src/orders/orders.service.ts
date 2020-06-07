@@ -1,5 +1,5 @@
 import { Injectable, HttpException } from '@nestjs/common'
-import { getManager, Repository, FindManyOptions } from 'typeorm'
+import { getManager, FindManyOptions } from 'typeorm'
 import { Order } from './orders.entity'
 import { Product } from 'src/products/products.entity'
 import { CreateOrderDTO } from './dto/create-order.dto'

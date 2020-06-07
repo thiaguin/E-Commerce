@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Param, Query, Req } from '@nestjs/common'
 import { ProductsService } from './products.service'
 import { Product } from './products.entity'
 import { CreateProductDto } from './dto/create-product.dto'
-import { SelectQueryBuilder } from 'typeorm'
 
 @Controller('products')
 export class ProductsController {

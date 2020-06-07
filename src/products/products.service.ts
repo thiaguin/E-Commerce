@@ -1,19 +1,6 @@
 import { Injectable, HttpException } from '@nestjs/common'
 import { Product } from './products.entity'
-import {
-    getManager,
-    Like,
-    Raw,
-    SelectQueryBuilder,
-    Between,
-    MoreThanOrEqual,
-    Equal,
-    LessThanOrEqual,
-    FindConditions,
-    FindOneOptions,
-    FindManyOptions,
-    getConnection,
-} from 'typeorm'
+import { getManager, Raw, Between, MoreThanOrEqual, Equal, LessThanOrEqual, getConnection } from 'typeorm'
 import { CreateProductDto } from './dto/create-product.dto'
 import { Order } from 'src/orders/orders.entity'
 

@@ -7,7 +7,6 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     JoinColumn,
-    OneToOne,
     BeforeInsert,
     BeforeUpdate,
 } from 'typeorm'
@@ -76,7 +75,7 @@ export class Product {
 
     @BeforeInsert()
     @BeforeUpdate()
-        updateHasStock() {
+    updateHasStock() {
         this.hasStock = this.stockQuantity > 0
     }
 }

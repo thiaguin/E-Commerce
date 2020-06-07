@@ -1,12 +1,11 @@
 import { Injectable, HttpException } from '@nestjs/common'
-import { getManager, TransactionManager } from 'typeorm'
+import { getManager } from 'typeorm'
 import { Photo } from './photos.entity'
 import { ProductParamsDTO } from './dto/product-params.dto'
 import { CreatePhotoDTO } from './dto/create-photos.dto'
 import { Response } from 'express'
 import * as path from 'path'
 import { Product } from 'src/products/products.entity'
-import { FilesInterceptor } from '@nestjs/platform-express'
 import { diskStorage } from 'multer'
 import { v4 as uuid } from 'uuid'
 
