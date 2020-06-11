@@ -1,0 +1,16 @@
+.ToolbarItem {
+    display: inline-block;
+    vertical-align: middle;
+    width: 45px;
+    margin-left: 15px;
+}
+
+.ToolbarItem:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 590px) {
+    .ToolbarItem {
+        display: none;
+    }
+}
