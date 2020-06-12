@@ -1,0 +1,12 @@
+.Departments {
+    background-color: grey;
+    position: absolute;
+    display: flex;
+    text-align: inherit;
+    height: 35px;
+    flex-wrap: wrap;
+}
+
+.abc {
+    display: grid;
+}

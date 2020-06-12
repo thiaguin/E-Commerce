@@ -2,15 +2,10 @@
     display: inline-block;
     vertical-align: middle;
     width: 45px;
-    margin-left: 15px;
+    margin-left: 5px;
+    margin-right: 10px;
 }
 
 .ToolbarItem:hover {
     cursor: pointer;
-}
-
-@media (max-width: 590px) {
-    .ToolbarItem {
-        display: none;
-    }
 }

@@ -1,6 +1,8 @@
 .Toolbar {
     box-sizing: border-box;
     background-color: #56ccf2;
+    padding-top: 10px;
+    min-width: 800px;
     height: 80px;
     width: 100%;
     display: inline-block;

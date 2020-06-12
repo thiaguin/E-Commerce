@@ -1,5 +1,5 @@
 import React from 'react'
-import logoIcon from '../../assets/logo.svg'
+import logoIcon from '../../../../assets/logo.png'
 import classes from './Logo.module.css'
 import { useHistory } from 'react-router-dom'
 

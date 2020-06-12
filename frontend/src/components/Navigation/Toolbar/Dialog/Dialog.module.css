@@ -24,9 +24,3 @@ p:hover {
     text-decoration: underline;
     cursor: pointer;
 }
-
-@media (max-width: 750px) {
-    .Dialog {
-        display: none;
-    }
-}

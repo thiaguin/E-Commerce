@@ -32,20 +32,8 @@
     cursor: pointer;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 910px) {
     .SearchBar {
         width: 40%;
-    }
-}
-
-@media (max-width: 750px) {
-    .SearchBar {
-        width: 290px;
-    }
-}
-
-@media (max-width: 460px) {
-    .SearchBar {
-        display: none;
     }
 }
