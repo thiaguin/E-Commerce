@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './SearchBar.module.css'
-import searchIcon from '../../../assets/search.svg'
+import searchIcon from '../../../../assets/search.svg'
 import { useHistory } from 'react-router-dom'
 
 const SearchBar = (props) => {

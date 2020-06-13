@@ -1,21 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import NavigationItem from './NavigationItem/NavigationItem'
+import NavigationMultipleItem from './NavigationMultipleItem/NavigationMultipleItem'
 import classes from './NavigationItems.module.css'
 import menuSvg from '../../../assets/menu.svg'
 import menuHoverSvg from '../../../assets/menuHover.svg'
-import Departments from './Departments'
+import Departments from './Departments/Departments'
 import Aux from '../../hoc/Aux'
 
 const NavigationItems = (props) => {
-    const { allDepartments, categories } = props.navigation
+    const { departments, categories } = props.navigation
     const [departmentsHovered, setDepartmentsHovered] = useState(false)
     const [showDepartment, setShowDepartment] = useState(false)
-    const ref = useRef(null)
-
     const [departmentSize, setDepartmentSize] = useState({ width: 0, margin: 0 })
 
-    const icon = departmentsHovered ? menuHoverSvg : menuSvg
+    const ref = useRef(null)
+
+    const icon = showDepartment || departmentsHovered ? menuHoverSvg : menuSvg
 
     const items = categories.map((element, index) => <NavigationItem item={element} key={index} />)
 
@@ -37,19 +38,18 @@ const NavigationItems = (props) => {
         setShowDepartment(false)
     }
 
-    console.log(showDepartment)
     useEffect(() => {
-        const width = ref.current.offsetWidth
-        const margin = ref.current.getBoundingClientRect()
-        setDepartmentSize({ width, margin: margin.x })
+        const elementInfo = ref.current.getBoundingClientRect()
+        setDepartmentSize({ width: elementInfo.width, margin: elementInfo.x })
     }, [ref])
 
     return (
         <Aux>
             <div className={classes.NavigationItems}>
-                <NavigationItem
+                <NavigationMultipleItem
+                    hover={showDepartment || departmentsHovered}
                     reference={ref}
-                    item={allDepartments}
+                    item={departments}
                     icon={icon}
                     enter={enterItemHandler}
                     leave={leaveItemHandler}

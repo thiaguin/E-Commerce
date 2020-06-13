@@ -2,14 +2,16 @@ import React from 'react'
 import Toolbar from './components/Navigation/Toolbar/Toolbar'
 import NavigationItems from './components/Navigation/NavigationItems/NavigationItems'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import mainImg from './assets/background.png'
+import MainPage from './components/MainPage/MainPage'
 import './App.css'
 
 const App = () => {
     return (
         <div className="App">
-            <Toolbar />
-            <NavigationItems />
+            <div style={{ position: 'fixed', width: '100%', top: 0, zIndex: 1 }}>
+                <Toolbar />
+                <NavigationItems />
+            </div>
             <Switch>
                 <Route
                     path="/wishes"
@@ -43,15 +45,7 @@ const App = () => {
                         </div>
                     )}
                 />
-                <Route
-                    path="/"
-                    component={(props) => (
-                        <div>
-                            <img src={mainImg} alt="img" />
-                            <img src={mainImg} alt="img" />
-                        </div>
-                    )}
-                />
+                <Route path="/" render={(props) => <MainPage {...props} />} />
             </Switch>
             <div>Hello world!</div>
         </div>

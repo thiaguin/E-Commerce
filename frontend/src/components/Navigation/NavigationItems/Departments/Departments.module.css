@@ -1,5 +1,6 @@
 .Departments {
-    background-color: grey;
+    background-color: white;
+    color: grey;
     position: absolute;
     display: flex;
     text-align: inherit;
@@ -7,6 +8,3 @@
     flex-wrap: wrap;
 }
 
-.abc {
-    display: grid;
-}

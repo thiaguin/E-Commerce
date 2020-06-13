@@ -1,7 +1,17 @@
 import * as actionTypes from '../actions/actionTypes'
 
 const initialState = {
-    allDepartments: { name: 'Todos os departamentos' },
+    departments: {
+        title: 'Todos os departamentos',
+        departmentList: [
+            { name: 'Informática' },
+            { name: 'Celulares' },
+            { name: 'Esporte' },
+            { name: 'Televisão' },
+            { name: 'Brinquedos' },
+            { name: 'Games' },
+        ],
+    },
     categories: [
         { name: 'Ofertas' },
         { name: 'Lançamentos' },

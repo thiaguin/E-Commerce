@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import classes from './Toolbar.module.css'
-import SearchBar from '../SearchBar/SearchBar'
+import SearchBar from './SearchBar/SearchBar'
 import Logo from './Logo/Logo'
 import Dialog from './Dialog/Dialog'
 import ToolbarItem from './ToolbarItem/ToolbarItem'
@@ -26,7 +26,6 @@ const Toolbar = (props) => {
         history.push(route)
     }
 
-    console.log(productSearch)
     return (
         <div className={classes.Toolbar}>
             <Logo />
