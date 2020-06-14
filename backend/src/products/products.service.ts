@@ -77,7 +77,7 @@ export class ProductsService {
         const order = this.getOrder(query)
 
         const [products, count] = await productRepository.findAndCount({
-            loadRelationIds: { relations: ['brand', 'category'] },
+            loadRelationIds: { relations: ['brand', 'category', 'photo'] },
             where: where,
             order: order,
             ...this.getPage(query),
