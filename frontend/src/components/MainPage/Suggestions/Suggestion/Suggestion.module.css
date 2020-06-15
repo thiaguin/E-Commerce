@@ -1,0 +1,40 @@
+.Suggestion {
+    background-color: honeydew;
+    height: 500px;
+}
+
+.Suggestion h1 {
+    padding-top: 60px;
+    padding-left: 45px;
+    text-align: left;
+    font-size: 2.5em;
+    color: grey;
+}
+
+.Carousel {
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 75px;
+    padding-left: 60px;
+    padding-right: 60px;
+    margin: 0;
+    outline: none;
+}
+
+.Carousel * {
+    outline: none;
+}
+.Suggestion .Carousel button {
+    background-color: Transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.Suggestion .Carousel button img {
+    background: none;
+    background-size: 0 0;
+    color: grey;
+    height: 30px;
+    width: 30px;
+}

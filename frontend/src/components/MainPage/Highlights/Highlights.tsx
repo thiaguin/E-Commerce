@@ -23,7 +23,6 @@ const highlights = (props) => {
         <div className={classes.Highlights}>
             <Carousel {...settings}>
                 <img src={mainImg} alt="main"></img>
-                <img src={logoImg} alt="main"></img>
                 <img src={shanks} alt="logo"></img>
             </Carousel>
         </div>

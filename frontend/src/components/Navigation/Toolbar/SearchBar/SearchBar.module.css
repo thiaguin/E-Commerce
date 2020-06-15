@@ -32,7 +32,13 @@
     cursor: pointer;
 }
 
-@media (max-width: 910px) {
+@media (max-width: 930px) {
+    .SearchBar {
+        width: 45%;
+    }
+}
+
+@media (max-width: 930px) {
     .SearchBar {
         width: 40%;
     }

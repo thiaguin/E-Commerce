@@ -7,7 +7,7 @@ import './App.css'
 
 const App = () => {
     return (
-        <div className="App">
+        <div>
             <div style={{ position: 'fixed', width: '100%', top: 0, zIndex: 1 }}>
                 <Toolbar />
                 <NavigationItems />
@@ -47,7 +47,7 @@ const App = () => {
                 />
                 <Route path="/" render={(props) => <MainPage {...props} />} />
             </Switch>
-            <div>Hello world!</div>
+            <div style={{ textAlign: 'center' }}>Hello world!</div>
         </div>
     )
 }
