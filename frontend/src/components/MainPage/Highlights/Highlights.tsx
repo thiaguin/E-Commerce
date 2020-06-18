@@ -1,6 +1,5 @@
 import React from 'react'
 import mainImg from '../../../assets/background.png'
-import logoImg from '../../../assets/logo.png'
 import shanks from '../../../assets/shanks.jpg'
 import * as ResponsiveCarousel from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader

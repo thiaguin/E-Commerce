@@ -18,6 +18,9 @@ const NavigationItems = (props) => {
 
     const icon = showDepartment || departmentsHovered ? menuHoverSvg : menuSvg
 
+    const navMultipleItemsWidth = ref?.current?.getBoundingClientRect()?.width
+    const navMultipleItemsMargin = ref?.current?.getBoundingClientRect()?.x
+
     const items = categories.map((element, index) => <NavigationItem item={element} key={index} />)
 
     const enterItemHandler = () => {
@@ -39,9 +42,8 @@ const NavigationItems = (props) => {
     }
 
     useEffect(() => {
-        const elementInfo = ref.current.getBoundingClientRect()
-        setDepartmentSize({ width: elementInfo.width, margin: elementInfo.x })
-    }, [ref])
+        setDepartmentSize({ width: navMultipleItemsWidth, margin: navMultipleItemsMargin })
+    }, [navMultipleItemsWidth, navMultipleItemsMargin])
 
     return (
         <Aux>

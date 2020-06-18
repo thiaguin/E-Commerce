@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import classes from './Suggestion.module.css'
 import ProductCard from '../../../ProductCard/ProductCard'
 import nextSvg from '../../../../assets/next.svg'
@@ -10,7 +10,7 @@ interface Settings {
     renderCenterRightControls: React.HTMLElement | null
     className: string
     height: string
-    renderBottomCenterControls: boolean
+    renderBottomCenterControls: Function
     slidesToShow: number
     slidesToScroll: number
 }
@@ -18,23 +18,45 @@ interface Settings {
 const Suggestion = (props) => {
     const Carousel: React.Component = NukaCarousel
     const products = [
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
-        <ProductCard padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="1" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="2" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="3" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="4" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="51" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="16" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="17" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="18" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="19" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="11" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="12" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="13" padding="0 20px" {...props.products[0]} />,
+        <ProductCard key="14" padding="0 20px" {...props.products[0]} />,
     ]
 
+    const [width, setWidth] = useState(window.innerWidth)
+
+    const getItemsPerPage = useCallback(() => {
+        if (width > 1500) return 7
+        else if (width > 960) return 5
+        else if (width > 620) return 3
+        else return 1
+    }, [width])
+
     const [page, setPage] = useState(1)
-    const maxPage = Math.ceil(products.length / 5)
+    const [itemsPerPage, setItemsPerPage] = useState(5)
+    const maxPage = Math.ceil(products.length / getItemsPerPage())
+
+    const onresize = () => {
+        setWidth(document.body.clientWidth)
+    }
+
+    const nextPage = () => {
+        setPage(page + 1)
+    }
+
+    const previousPage = () => {
+        setPage(page - 1)
+    }
 
     const settings: Settings = {
         renderCenterLeftControls: ({ previousSlide }) => (
@@ -43,26 +65,25 @@ const Suggestion = (props) => {
             </button>
         ),
         renderCenterRightControls: ({ nextSlide }) => (
-            <button style={{ paddingRight: '30px' }} onClick={nextSlide && nextPage}>
-                <img src={nextSvg} alt="next" />
+            <button onClick={nextSlide && nextPage}>
+                <img style={{ paddingRight: '30px' }} src={nextSvg} alt="next" />
             </button>
         ),
         className: classes.Carousel,
         height: '370px',
-        renderBottomCenterControls: false,
-        slidesToShow: 5,
-        slidesToScroll: 5,
-    }
-    const nextPage = () => {
-        setPage(page + 1)
-    }
-
-    const previousPage = () => {
-        setPage(page + 1)
+        renderBottomCenterControls: () => false,
+        slidesToShow: itemsPerPage,
+        slidesToScroll: itemsPerPage,
     }
 
     settings.renderCenterLeftControls = page === 1 ? null : settings.renderCenterLeftControls
     settings.renderCenterRightControls = page === maxPage ? null : settings.renderCenterRightControls
+
+    window.addEventListener('resize', onresize)
+
+    useEffect(() => {
+        setItemsPerPage(getItemsPerPage())
+    }, [getItemsPerPage, width])
 
     return (
         <div className={classes.Suggestion}>

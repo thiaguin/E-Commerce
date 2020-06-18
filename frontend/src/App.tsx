@@ -47,7 +47,6 @@ const App = () => {
                 />
                 <Route path="/" render={(props) => <MainPage {...props} />} />
             </Switch>
-            <div style={{ textAlign: 'center' }}>Hello world!</div>
         </div>
     )
 }

@@ -19,11 +19,13 @@
     padding-right: 60px;
     margin: 0;
     outline: none;
+    text-align: center;
 }
 
 .Carousel * {
     outline: none;
 }
+
 .Suggestion .Carousel button {
     background-color: Transparent;
     border: none;
