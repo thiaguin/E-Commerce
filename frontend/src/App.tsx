@@ -3,12 +3,13 @@ import Toolbar from './components/Navigation/Toolbar/Toolbar'
 import NavigationItems from './components/Navigation/NavigationItems/NavigationItems'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import MainPage from './components/MainPage/MainPage'
+import Search from './components/Search/Search'
 import './App.css'
 
 const App = () => {
     return (
         <div>
-            <div style={{ position: 'fixed', width: '100%', top: 0, zIndex: 1 }}>
+            <div style={{ position: 'fixed', width: '100%', top: 0, zIndex: 2 }}>
                 <Toolbar />
                 <NavigationItems />
             </div>
@@ -37,14 +38,7 @@ const App = () => {
                         </div>
                     )}
                 />
-                <Route
-                    path="/search"
-                    component={(props) => (
-                        <div>
-                            <h1>Search</h1>
-                        </div>
-                    )}
-                />
+                <Route path="/products" render={(props) => <Search {...props} />} />
                 <Route path="/" render={(props) => <MainPage {...props} />} />
             </Switch>
         </div>

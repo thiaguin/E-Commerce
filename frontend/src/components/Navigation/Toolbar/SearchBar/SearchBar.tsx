@@ -7,7 +7,7 @@ const SearchBar = (props) => {
     const history = useHistory()
 
     const submitHandler = () => {
-        history.push('/searching')
+        history.push('/products')
     }
 
     const onKeyDownHandler = (event) => {

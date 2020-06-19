@@ -61,17 +61,16 @@ const ProductCard = (props) => {
 
     if (props.isFull) classCss.push(classes.Full)
 
+    const priceDiscounted =
+        currentPrice !== originalPrice ? <h3>{originalPrice}</h3> : <h3 style={{ opacity: 0 }}>{originalPrice}</h3>
+
     return (
         <div className={classCss.join(' ')}>
             <img src={src} onError={onErrorImgHandler} alt={props.title} />
             <h1 data-tip={product.title}>sfasfafssafasfasffasfasfasfsaasfasasfasassaasfasfasfasf top de verdade</h1>
             <Tooltip type="light" backgroundColor="#f0f0d0" />
             {props.isFull && <StarRatings {...ratingSettings} />}
-            {currentPrice !== originalPrice ? (
-                <h3>{originalPrice}</h3>
-            ) : (
-                <h3 style={{ opacity: 0 }}>{originalPrice}</h3>
-            )}
+            {priceDiscounted}
             <h2>{currentPrice}</h2>
         </div>
     )

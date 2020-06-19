@@ -1,0 +1,47 @@
+.Filter {
+    padding-left: 15px;
+}
+
+.Filter h4 {
+    margin: 0;
+    font-size: 1em;
+    color: #3dbee9;
+    padding-bottom: 5px;
+}
+
+.Filter ul {
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    padding-left: 25px;
+    list-style-type: none;
+    padding-bottom: 7px;
+    padding-top: 7px;
+}
+
+.Scroll ul {
+    width: 80%;
+    height: 150px;
+    overflow: auto;
+}
+
+.Filter li {
+    padding: 2px 0;
+    font-size: 0.9em;
+    color: grey;
+}
+
+.Filter li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1em;
+    color: darkgray;
+}
+
+.Rating {
+    width: 100px;
+}
+
+.Rating:hover {
+    cursor: pointer;
+}

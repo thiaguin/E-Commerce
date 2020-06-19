@@ -1,0 +1,13 @@
+.Filters {
+    width: 250px;
+    min-height: 600px;
+    display: inline-block;
+}
+
+.Filters h1 {
+    position: relative;
+    padding-top: 25px;
+    padding-left: 15px;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
