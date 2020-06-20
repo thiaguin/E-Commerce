@@ -1,46 +1,38 @@
-import React from 'react'
+import React, { useEffect, useCallback } from 'react'
 import Suggestion from './Suggestion/Suggestion'
-import onepieceimg from '../../../assets/One-Piece.png'
+import * as actions from '../../../store/actions/index'
+import { connect, useDispatch } from 'react-redux'
 
-const suggestions = (props) => {
-    const productSuggestions = [
-        {
-            title: 'Sugestão 1',
-            products: [
-                {
-                    title: 'Produto bom',
-                    price: 50000,
-                    rating: 0,
-                    discount: 0,
-                    photo: onepieceimg,
-                },
-            ],
-        },
-        {
-            title: 'Sugestão 2',
-            products: [
-                {
-                    title: 'Produto bom',
-                    price: 50000,
-                    rating: 0,
-                    discount: 0,
-                    photo: onepieceimg,
-                },
-            ],
-        },
-        {
-            title: 'Sugestão 3',
-            products: [
-                {
-                    title: 'Produto bom',
-                    price: 50000,
-                    rating: 0,
-                    discount: 0,
-                    photo: onepieceimg,
-                },
-            ],
-        },
-    ]
+const Suggestions = (props) => {
+    const dispatch = useDispatch()
+
+    const getBestSellers = useCallback((params) => dispatch(actions.getSuggestions(params)), [dispatch])
+
+    useEffect(() => {
+        const bestSellersParam = {
+            title: 'Mais Vendidos',
+            params: { hasStock: true, take: 15, 'order[field]': 'saleQuantity' },
+        }
+        getBestSellers(bestSellersParam)
+    }, [getBestSellers])
+
+    useEffect(() => {
+        const bestSellersParam = {
+            title: 'Maiores Ofertas',
+            params: { hasStock: true, take: 15, 'order[field]': 'discount' },
+        }
+        getBestSellers(bestSellersParam)
+    }, [getBestSellers])
+
+    useEffect(() => {
+        const bestSellersParam = {
+            title: 'Novidades',
+            params: { hasStock: true, take: 15, 'order[field]': 'createdAt' },
+        }
+        getBestSellers(bestSellersParam)
+    }, [getBestSellers])
+
+    const { productSuggestions } = props.suggestions
 
     const suggestionlist = productSuggestions.map((element, index) => {
         return <Suggestion title={element.title} products={element.products} key={index} />
@@ -49,4 +41,10 @@ const suggestions = (props) => {
     return <div>{suggestionlist}</div>
 }
 
-export default suggestions
+const mapStateToProps = (state) => {
+    return {
+        suggestions: state.suggestions,
+    }
+}
+
+export default connect(mapStateToProps)(Suggestions)

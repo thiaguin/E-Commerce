@@ -7,9 +7,11 @@ const products = (props) => {
     const count = true ? <p>(props.count produtos encontrados)</p> : null
 
     const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
+        { value: 'Novidades', label: 'Novidades' },
+        { value: 'Maior Preço', label: 'Maior Preço' },
+        { value: 'Menor Preço', label: 'Menor Preço' },
+        { value: 'Mais Vendidos', label: 'Mais Vendidos' },
+        { value: 'Melhores Avaliados', label: 'Melhores Avaliados' },
     ]
 
     // const products = [
@@ -30,19 +32,35 @@ const products = (props) => {
     return (
         <div className={classes.Products}>
             {title && (
-                <div>
+                <div style={{ height: '60px' }}>
                     {title}
                     {count}
                 </div>
             )}
-            <h6>Ordenar</h6>
-            <Select options={options} className={classes.Select} />
-            {/* <h6>Pages</h6>
-            <Select options={options} className={classes.Select} /> */}
-            <ProductCard key="14" padding="0 20px" />
-            <ProductCard key="2" padding="0 20px" />
-            <ProductCard key="4" padding="0 20px" />
-            <ProductCard key="51" padding="0 20px" />
+            <div>
+                <h6>Ordenar</h6>
+                <Select options={options} placeholder="Selecione..." className={classes.Select} />
+            </div>
+            <ProductCard isFull={true} key="1" padding="0 20px" />
+            <ProductCard isFull={true} key="2" padding="0 20px" />
+            <ProductCard isFull={true} key="4" padding="0 20px" />
+            <ProductCard isFull={true} key="3" padding="0 20px" />
+            <ProductCard isFull={true} key="5" padding="0 20px" />
+            <ProductCard isFull={true} key="6" padding="0 20px" />
+            <ProductCard isFull={true} key="1a4" padding="0 20px" />
+            <ProductCard isFull={true} key="a2" padding="0 20px" />
+            <ProductCard isFull={true} key="sa4" padding="0 20px" />
+            <ProductCard isFull={true} key="asd4" padding="0 20px" />
+            <ProductCard isFull={true} key="1d4" padding="0 20px" />
+            <ProductCard isFull={true} key="2c" padding="0 20px" />
+            <ProductCard isFull={true} key="4zcx" padding="0 20px" />
+            <ProductCard isFull={true} key="1zxv4" padding="0 20px" />
+            <ProductCard isFull={true} key="vz2" padding="0 20px" />
+            <ProductCard isFull={true} key="4vzx" padding="0 20px" />
+            <ProductCard isFull={true} key="1xvz4" padding="0 20px" />
+            <ProductCard isFull={true} key="zvx2" padding="0 20px" />
+            <ProductCard isFull={true} key="4zzxv" padding="0 20px" />
+            <ProductCard isFull={true} key="4zxv" padding="0 20px" />
         </div>
     )
 }

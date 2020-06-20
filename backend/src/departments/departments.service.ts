@@ -1,14 +1,18 @@
 import { Injectable, HttpException } from '@nestjs/common'
-import { getManager, UpdateResult } from 'typeorm'
+import { getManager, UpdateResult, FindManyOptions } from 'typeorm'
 import { Department } from './departments.entity'
 import { CreateDepartmentDTO } from './dto/create-departments.dto'
 import { UpdateDepartmentDTO } from './dto/update-departments.dto'
 
 @Injectable()
 export class DepartmentsService {
-    async findAll(): Promise<Department[]> {
+    async findAll(query): Promise<Department[]> {
         const departamentRepository = getManager().getRepository(Department)
-        return await departamentRepository.find({ relations: ['categories'] })
+        const findOptions: FindManyOptions<Department> = { order: { name: 'ASC' } }
+
+        if (query.relations) findOptions.relations = ['categories']
+
+        return await departamentRepository.find(findOptions)
     }
 
     async create(body: CreateDepartmentDTO): Promise<Department> {

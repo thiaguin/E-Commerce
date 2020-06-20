@@ -1,6 +1,8 @@
 .Products {
     display: inline-block;
     vertical-align: top;
+    position: absolute;
+    min-width: 390px;
 }
 
 .Products h4 {
@@ -40,6 +42,5 @@
 .Select {
     display: inline-block;
     margin-top: 10px;
-    /* padding-top: 5px; */
-    width: 150px;
+    width: 165px;
 }

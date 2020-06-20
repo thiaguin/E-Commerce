@@ -17,21 +17,9 @@ interface Settings {
 
 const Suggestion = (props) => {
     const Carousel: React.Component = NukaCarousel
-    const products = [
-        <ProductCard key="1" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="2" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="3" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="4" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="51" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="16" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="17" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="18" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="19" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="11" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="12" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="13" padding="0 20px" {...props.products[0]} />,
-        <ProductCard key="14" padding="0 20px" {...props.products[0]} />,
-    ]
+    const products = props.products.products.map((element) => {
+        return <ProductCard key={element.id} padding="0 20px" product={element} />
+    })
 
     const [width, setWidth] = useState(window.innerWidth)
 
@@ -50,22 +38,24 @@ const Suggestion = (props) => {
         setWidth(document.body.clientWidth)
     }
 
-    const nextPage = () => {
+    const nextPage = (nextSlide) => {
+        nextSlide()
         setPage(page + 1)
     }
 
-    const previousPage = () => {
+    const previousPage = (previousSlide) => {
+        previousSlide()
         setPage(page - 1)
     }
 
     const settings: Settings = {
         renderCenterLeftControls: ({ previousSlide }) => (
-            <button onClick={previousSlide && previousPage}>
+            <button onClick={() => previousPage(previousSlide)}>
                 <img style={{ paddingLeft: '30px' }} src={previousSvg} alt="previous" />
             </button>
         ),
         renderCenterRightControls: ({ nextSlide }) => (
-            <button onClick={nextSlide && nextPage}>
+            <button onClick={() => nextPage(nextSlide)}>
                 <img style={{ paddingRight: '30px' }} src={nextSvg} alt="next" />
             </button>
         ),

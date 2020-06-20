@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { connect, useDispatch } from 'react-redux'
 import NavigationItem from './NavigationItem/NavigationItem'
 import NavigationMultipleItem from './NavigationMultipleItem/NavigationMultipleItem'
 import classes from './NavigationItems.module.css'
 import menuSvg from '../../../assets/menu.svg'
 import menuHoverSvg from '../../../assets/menuHover.svg'
 import Departments from './Departments/Departments'
+import * as actions from '../../../store/actions/index'
 import Aux from '../../hoc/Aux'
 
 const NavigationItems = (props) => {
+    const dispatch = useDispatch()
+
+    const initGetDepartments = useCallback(() => dispatch(actions.getDepartment()), [dispatch])
     const { departments, categories } = props.navigation
     const [departmentsHovered, setDepartmentsHovered] = useState(false)
     const [showDepartment, setShowDepartment] = useState(false)
@@ -40,6 +44,10 @@ const NavigationItems = (props) => {
     const hiddeDepartments = () => {
         setShowDepartment(false)
     }
+
+    useEffect(() => {
+        initGetDepartments()
+    }, [initGetDepartments])
 
     useEffect(() => {
         setDepartmentSize({ width: navMultipleItemsWidth, margin: navMultipleItemsMargin })

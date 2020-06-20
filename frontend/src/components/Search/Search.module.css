@@ -1,6 +1,6 @@
 .Search {
     margin-top: 115px;
     display: inline-block;
-    position: relative;
     width: 100%;
+    min-width: 640px;
 }

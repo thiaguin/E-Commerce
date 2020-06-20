@@ -5,6 +5,7 @@
 }
 
 .Filters h1 {
+    display: inline-block;
     position: relative;
     padding-top: 25px;
     padding-left: 15px;

@@ -9,7 +9,7 @@ const Search = (props) => {
             {/* <Products /> */}
             <Filters />
             <Products />
-            <div> abc</div>
+            {/* <div> abc</div> */}
         </div>
     )
 }
