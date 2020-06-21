@@ -9,11 +9,13 @@ import {
     JoinColumn,
     BeforeInsert,
     BeforeUpdate,
+    getRepository,
 } from 'typeorm'
 import { Photo } from '../photos/photos.entity'
 import { Brand } from '../brands/brands.entity'
 import { Category } from 'src/categories/categories.entity'
 import { ProductOrder } from 'src/productOrder/productOrder.entity'
+import { Department } from 'src/departments/departments.entity'
 
 @Entity()
 export class Product {
@@ -58,6 +60,10 @@ export class Product {
     @JoinColumn()
     category: Category
 
+    @ManyToOne(() => Department, (department) => department.id, { nullable: false })
+    @JoinColumn()
+    department: Department
+
     @OneToMany(() => ProductOrder, (productOrder) => productOrder.product)
     productOrder: ProductOrder[]
 
@@ -77,5 +83,17 @@ export class Product {
     @BeforeUpdate()
     updateHasStock() {
         this.hasStock = this.stockQuantity > 0
+    }
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    async setDepartment() {
+        if (this.category) {
+            const category = await getRepository(Category).findOne({
+                where: { id: this.category },
+                loadRelationIds: { relations: ['department'] },
+            })
+            this.department = category.department
+        }
     }
 }

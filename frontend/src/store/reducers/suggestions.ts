@@ -1,5 +1,4 @@
 import * as actionTypes from '../actions/actionTypes'
-import onepieceimg from '../../assets/One-Piece.png'
 
 const initialState = {
     productSuggestions: [],
@@ -8,7 +7,10 @@ const initialState = {
 const getSuggestionsSuccess = (state, action) => {
     return {
         ...state,
-        productSuggestions: [...state.productSuggestions, { title: action.title, products: action.productsFetched }],
+        productSuggestions: [
+            ...state.productSuggestions,
+            { title: action.title, products: action.productsFetched, query: action.query },
+        ],
     }
 }
 

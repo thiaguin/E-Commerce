@@ -38,6 +38,14 @@ const App = () => {
                         </div>
                     )}
                 />
+                <Route
+                    path="/contactus"
+                    component={(props) => (
+                        <div style={{ marginTop: '115px' }}>
+                            <h1>Contact us</h1>
+                        </div>
+                    )}
+                />
                 <Route path="/products" render={(props) => <Search {...props} />} />
                 <Route path="/" render={(props) => <MainPage {...props} />} />
             </Switch>

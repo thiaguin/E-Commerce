@@ -74,10 +74,9 @@ const Suggestion = (props) => {
     useEffect(() => {
         setItemsPerPage(getItemsPerPage())
     }, [getItemsPerPage, width])
-
     return (
         <div className={classes.Suggestion}>
-            <h1>{props.title}</h1>
+            <h1 onClick={() => props.clickTitle(props.query)}>{props.title}</h1>
             <Carousel {...settings}>{products}</Carousel>
         </div>
     )

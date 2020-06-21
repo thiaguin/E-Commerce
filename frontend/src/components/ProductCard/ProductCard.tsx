@@ -3,7 +3,6 @@ import classes from './ProductCard.module.css'
 import imageDefault from '../../assets/image-default.png'
 import ReactTooltip from 'react-tooltip'
 import StarRatings from 'react-star-ratings'
-import products from '../Search/Products/Products'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 const Tooltip: React.HTMLElement = ReactTooltip
@@ -68,7 +67,7 @@ const ProductCard = (props) => {
     return (
         <div className={classCss.join(' ')}>
             <img src={src} onError={onErrorImgHandler} alt={props.title} />
-            <h1 data-tip={product.title}>{product.title} top de verdade</h1>
+            <h1 data-tip={product.title}>{product.title}</h1>
             <Tooltip type="light" backgroundColor="#f0f0d0" />
             {props.isFull && <StarRatings {...ratingSettings} />}
             {priceDiscounted}

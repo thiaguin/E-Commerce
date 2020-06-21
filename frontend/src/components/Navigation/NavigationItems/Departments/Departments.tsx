@@ -11,7 +11,14 @@ const departments = (props) => {
     const { departmentList } = props.navigation.departments
 
     const departments = departmentList.map((element, index) => {
-        return <Department element={element} isLast={index === departmentList.length - 1} key={index} />
+        return (
+            <Department
+                click={props.click}
+                element={element}
+                isLast={index === departmentList.length - 1}
+                key={index}
+            />
+        )
     })
 
     if (props.show) {

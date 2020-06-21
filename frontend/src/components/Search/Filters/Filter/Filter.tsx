@@ -7,7 +7,11 @@ const filter = (props) => {
     props.scroll && className.push(classes.Scroll)
 
     const items = props.items?.map((element) => {
-        return <li key={element.id}>{element.name}</li>
+        return (
+            <li onClick={() => props.click(element.id)} key={element.id}>
+                {element.name}
+            </li>
+        )
     })
 
     return (

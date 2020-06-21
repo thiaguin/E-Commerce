@@ -1,68 +1,79 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Select from 'react-select'
 import classes from './Products.module.css'
 import ProductCard from '../../ProductCard/ProductCard'
-const products = (props) => {
-    const title = true ? <h4>props.title</h4> : null
-    const count = true ? <p>(props.count produtos encontrados)</p> : null
+import * as actions from '../../../store/actions/index'
+import { connect, useDispatch } from 'react-redux'
+
+const Products = (props) => {
+    const dispatch = useDispatch()
+
+    const title = props.products?.query?.title
+    const count = props?.products?.count
+
+    const initProductsSearch = useCallback((params) => dispatch(actions.getProducts(params)), [dispatch])
+    const countFounded = count ? <p>({count} produtos encontrados)</p> : null
 
     const options = [
-        { value: 'Novidades', label: 'Novidades' },
-        { value: 'Maior Preço', label: 'Maior Preço' },
-        { value: 'Menor Preço', label: 'Menor Preço' },
-        { value: 'Mais Vendidos', label: 'Mais Vendidos' },
-        { value: 'Melhores Avaliados', label: 'Melhores Avaliados' },
+        { value: 'Novidades', label: 'Novidades', query: { 'order[field]': 'createdAt', 'order[direction]': 'DESC' } },
+        { value: 'Maior Preço', label: 'Maior Preço', query: { 'order[field]': 'price' } },
+        { value: 'Menor Preço', label: 'Menor Preço', query: { 'order[field]': 'price', 'order[direction]': 'ASC' } },
+        { value: 'Mais Vendidos', label: 'Mais Vendidos', query: { 'order[field]': 'saleQuantity' } },
+        { value: 'Melhores Avaliados', label: 'Melhores Avaliados', query: { 'order[field]': 'rating' } },
     ]
 
-    // const products = [
-    //     <ProductCard key="1" padding="0 20px" />,
-    //     // <ProductCard key="2" padding="0 20px" />,
-    //     // <ProductCard key="4" padding="0 20px" />,
-    //     // <ProductCard key="51" padding="0 20px" />,
-    //     // <ProductCard key="16" padding="0 20px" />,
-    //     // <ProductCard key="17" padding="0 20px" />,
-    //     // <ProductCard key="18" padding="0 20px" />,
-    //     // <ProductCard key="19" padding="0 20px" />,
-    //     // <ProductCard key="11" padding="0 20px" />,
-    //     // <ProductCard key="12" padding="0 20px" />,
-    //     // <ProductCard key="13" padding="0 20px" />,
-    //     // <ProductCard key="14" padding="0 20px" />,
-    // ]
+    const orderSelectHandler = (selectedOption) => {
+        props.onAddQuery(selectedOption.query)
+    }
+
+    const { query } = props.products
+
+    useEffect(() => {
+        const search = { params: { ...query, take: 20, page: 0 } }
+        initProductsSearch(search)
+    }, [initProductsSearch, query])
+
+    let productsList = null
+
+    if (props.products.count > 0) {
+        const { products } = props.products
+        productsList = products.map((element) => {
+            return <ProductCard isFull={true} key={element.id} product={element} />
+        })
+    }
 
     return (
         <div className={classes.Products}>
             {title && (
                 <div style={{ height: '60px' }}>
-                    {title}
-                    {count}
+                    <h4>{title}</h4>
+                    {countFounded}
                 </div>
             )}
             <div>
                 <h6>Ordenar</h6>
-                <Select options={options} placeholder="Selecione..." className={classes.Select} />
+                <Select
+                    onChange={orderSelectHandler}
+                    options={options}
+                    placeholder="Selecione..."
+                    className={classes.Select}
+                />
             </div>
-            <ProductCard isFull={true} key="1" padding="0 20px" />
-            <ProductCard isFull={true} key="2" padding="0 20px" />
-            <ProductCard isFull={true} key="4" padding="0 20px" />
-            <ProductCard isFull={true} key="3" padding="0 20px" />
-            <ProductCard isFull={true} key="5" padding="0 20px" />
-            <ProductCard isFull={true} key="6" padding="0 20px" />
-            <ProductCard isFull={true} key="1a4" padding="0 20px" />
-            <ProductCard isFull={true} key="a2" padding="0 20px" />
-            <ProductCard isFull={true} key="sa4" padding="0 20px" />
-            <ProductCard isFull={true} key="asd4" padding="0 20px" />
-            <ProductCard isFull={true} key="1d4" padding="0 20px" />
-            <ProductCard isFull={true} key="2c" padding="0 20px" />
-            <ProductCard isFull={true} key="4zcx" padding="0 20px" />
-            <ProductCard isFull={true} key="1zxv4" padding="0 20px" />
-            <ProductCard isFull={true} key="vz2" padding="0 20px" />
-            <ProductCard isFull={true} key="4vzx" padding="0 20px" />
-            <ProductCard isFull={true} key="1xvz4" padding="0 20px" />
-            <ProductCard isFull={true} key="zvx2" padding="0 20px" />
-            <ProductCard isFull={true} key="4zzxv" padding="0 20px" />
-            <ProductCard isFull={true} key="4zxv" padding="0 20px" />
+            {productsList}
         </div>
     )
 }
 
-export default products
+const mapStateToProps = (state) => {
+    return {
+        products: state.products,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAddQuery: (query) => dispatch(actions.addProductQuery(query)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products)

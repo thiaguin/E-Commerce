@@ -1,45 +1,48 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import classes from './Filters.module.css'
 import Filter from './Filter/Filter'
 import FilterRating from './Filter/FilterRating'
+import { connect, useDispatch } from 'react-redux'
+import * as actions from '../../../store/actions/index'
 
 const Filters = (props) => {
+    const dispatch = useDispatch()
+
+    const getCategoriesDepartment = useCallback((params) => dispatch(actions.getCategories(params)), [dispatch])
+    const getBrandsFilter = useCallback((params) => dispatch(actions.getBrandsFilter(params)), [dispatch])
+
+    const departmentId = props.products?.query?.department
+    const categoryId = props.products?.query?.category
+    const brandId = props.products?.query?.brand
+
     const department = {
-        name: 'Departamento',
-        departments: [
-            { name: 'Futebol', id: '1' },
-            { name: 'Esportivo', id: '2' },
-            { name: 'Informatica', id: '3' },
-            { name: 'dep4', id: '4' },
-            { name: 'dep5', id: '5' },
-            { name: 'dep6', id: '6' },
-        ],
+        name: props.navigation?.departments?.title,
+        departments: props.navigation?.departments?.departmentList,
     }
 
     const category = {
-        name: 'Category',
-        categories: [
-            { name: 'chuteira', id: '1' },
-            { name: 'camisa de time', id: '2' },
-            { name: 'boné', id: '3' },
-            { name: 'cat4', id: '4' },
-            { name: 'cat5', id: '5' },
-        ],
+        name: 'Categorias',
+        categories: props.navigation?.departmentCategories?.[0]?.categories,
     }
 
     const brand = {
-        name: 'Marca',
-        categories: [
-            { name: 'Adibas', id: '1' },
-            { name: 'Nice', id: '2' },
-            { name: 'Pumma', id: '3' },
-            { name: 'cat4', id: '4' },
-            { name: 'cat5', id: '5' },
-            { name: 'cat6', id: '6' },
-            { name: 'cat7', id: '7' },
-            { name: 'cat8', id: '8' },
-        ],
+        name: 'Marcas',
+        brands: props.navigation?.brands,
     }
+
+    useEffect(() => {
+        if (departmentId && !categoryId) {
+            getCategoriesDepartment({ id: departmentId })
+        }
+    }, [getCategoriesDepartment, categoryId, departmentId])
+
+    useEffect(() => {
+        if (departmentId && !brandId) {
+            const entity = categoryId ? 'categories' : 'departments'
+            const entityId = categoryId || departmentId
+            getBrandsFilter({ entity, entityId })
+        }
+    }, [brandId, categoryId, departmentId, getBrandsFilter])
 
     const price: { name: string; prices: any[] } = {
         name: 'Preço',
@@ -51,6 +54,7 @@ const Filters = (props) => {
 
     const diffPrice = maxPrice - minPrice
     const priceIntervals = diffPrice / 5
+
     let currentMinPrice = minPrice
 
     for (let i = 0; i < 5; i++) {
@@ -61,30 +65,58 @@ const Filters = (props) => {
         currentMinPrice += priceIntervals
     }
 
-    const hasDepartment = true
-    const hasCategory = false
-    const hasBrand = false
     const hasRating = false
     const hasPrice = false
-    const filterDepartment = !hasDepartment ? <Filter title={department.name} items={department.departments} /> : null
-    const filterCategories =
-        !hasCategory && hasDepartment ? (
-            <Filter scroll={true} title={category.name} items={category.categories} />
-        ) : null
-    const filterBrand =
-        !hasBrand && hasDepartment ? <Filter scroll={true} title={brand.name} items={brand.categories} /> : null
-    const filterPrice = !hasPrice && hasDepartment ? <Filter title={price.name} items={price.prices} /> : null
+
+    const clickDepartmentHandler = (id) => {
+        props.onAddFilter({ department: id })
+    }
+
+    const clickCategoriesHandler = (id) => {
+        props.onAddFilter({ category: id })
+    }
+
+    const clickBrandsHandler = (id) => {
+        props.onAddFilter({ brand: id })
+    }
+
+    const filterPrice = !hasPrice && departmentId ? <Filter title={price.name} items={price.prices} /> : null
+
     return (
         <div className={classes.Filters}>
             <h1>Filtros</h1>
-            {filterDepartment}
-            {filterCategories}
-            {filterBrand}
-            {!hasRating && hasDepartment && <FilterRating />}
+            {!departmentId && (
+                <Filter click={clickDepartmentHandler} title={department.name} items={department.departments} />
+            )}
+            {!categoryId && departmentId && (
+                <Filter
+                    click={clickCategoriesHandler}
+                    scroll={true}
+                    title={category.name}
+                    items={category.categories}
+                />
+            )}
+            {!brandId && departmentId && (
+                <Filter click={clickBrandsHandler} scroll={true} title={brand.name} items={brand.brands} />
+            )}
+            {!hasRating && departmentId && <FilterRating />}
             {filterPrice}
             <Filter></Filter>
         </div>
     )
 }
 
-export default Filters
+const mapStateToProps = (state) => {
+    return {
+        navigation: state.navigation,
+        products: state.products,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAddFilter: (query) => dispatch(actions.addProductQuery(query)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filters)

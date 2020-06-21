@@ -13,21 +13,22 @@ export const getSuggestionsFail = () => {
     }
 }
 
-export const getSuggestionsSuccess = (data, title) => {
+export const getSuggestionsSuccess = (data, title, query) => {
     return {
         type: actionTypes.GET_SUGGESTIONS_SUCCESS,
         productsFetched: data,
         title: title,
+        query: query,
     }
 }
 
-export const getSuggestions = ({ params, title }) => {
+export const getSuggestions = ({ params, title, queryDefault }) => {
     return (dispatch) => {
         axios
             .get('/products', {
                 params,
             })
-            .then((response) => dispatch(getSuggestionsSuccess(response.data, title)))
+            .then((response) => dispatch(getSuggestionsSuccess(response.data, title, queryDefault)))
             .catch((error) => {
                 dispatch(getSuggestionsFail())
             })

@@ -8,11 +8,13 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import navigationReducer from './store/reducers/navigation'
 import suggestionsReducer from './store/reducers/suggestions'
+import productsReducer from './store/reducers/products'
 import thunk from 'redux-thunk'
 
 const reducers = combineReducers({
     navigation: navigationReducer,
     suggestions: suggestionsReducer,
+    products: productsReducer,
 })
 
 declare global {

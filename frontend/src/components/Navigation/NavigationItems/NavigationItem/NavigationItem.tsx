@@ -5,7 +5,7 @@ const NavigationItem = (props) => {
     const icon = props.icon ? <img className={classes.NavigatiomIcon} src={props.icon} alt="icon" /> : null
 
     return (
-        <div className={classes.NavigationItem}>
+        <div className={classes.NavigationItem} onClick={() => props.click(props.item)}>
             {icon}
             {props.item.name}
         </div>

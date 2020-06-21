@@ -1,2 +1,18 @@
-export { getDepartmentsStart, getDepartmentSuccess, getDepartmentFail, getDepartment } from './navigation'
-export { getSuggestionsStart, getSuggestionsSuccess, getSuggestionsFail, getSuggestions } from './suggestion'
+export {
+    getDepartment,
+    getDepartmentsStart,
+    getDepartmentSuccess,
+    getDepartmentFail,
+    getCategories,
+    getBrandsFilter,
+} from './navigation'
+export { getSuggestions, getSuggestionsStart, getSuggestionsSuccess, getSuggestionsFail } from './suggestion'
+export {
+    addProductQuery,
+    getProducts,
+    getProductsStart,
+    getProductsSuccess,
+    getProductsFail,
+    setProductsQuery,
+    resetProductsQuery,
+} from './products'

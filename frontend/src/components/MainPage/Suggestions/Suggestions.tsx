@@ -2,40 +2,63 @@ import React, { useEffect, useCallback } from 'react'
 import Suggestion from './Suggestion/Suggestion'
 import * as actions from '../../../store/actions/index'
 import { connect, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 const Suggestions = (props) => {
     const dispatch = useDispatch()
+    const history = useHistory()
 
-    const getBestSellers = useCallback((params) => dispatch(actions.getSuggestions(params)), [dispatch])
+    const getSuggestions = useCallback((params) => dispatch(actions.getSuggestions(params)), [dispatch])
 
-    useEffect(() => {
-        const bestSellersParam = {
-            title: 'Mais Vendidos',
-            params: { hasStock: true, take: 15, 'order[field]': 'saleQuantity' },
-        }
-        getBestSellers(bestSellersParam)
-    }, [getBestSellers])
+    const clickTitleHandler = (query) => {
+        props.onClickTitleHandler(query)
+        history.push('/products')
+    }
 
-    useEffect(() => {
-        const bestSellersParam = {
-            title: 'Maiores Ofertas',
-            params: { hasStock: true, take: 15, 'order[field]': 'discount' },
-        }
-        getBestSellers(bestSellersParam)
-    }, [getBestSellers])
+    const suggestionsLength = props.suggestions?.productSuggestions?.length
 
     useEffect(() => {
-        const bestSellersParam = {
-            title: 'Novidades',
-            params: { hasStock: true, take: 15, 'order[field]': 'createdAt' },
+        if (!suggestionsLength) {
+            const bestSellersQuery = { hasStock: true, 'order[field]': 'saleQuantity' }
+            const offersQuery = { hasStock: true, 'order[field]': 'discount' }
+            const newsQuery = { hasStock: true, 'order[field]': 'createdAt' }
+
+            const bestSellersParam = {
+                title: 'Mais Vendidos',
+                params: { ...bestSellersQuery, take: 15 },
+                queryDefault: bestSellersQuery,
+            }
+
+            const bestOffersParam = {
+                title: 'Maiores Ofertas',
+                params: { ...offersQuery, take: 15 },
+                queryDefault: offersQuery,
+            }
+
+            const newsParam = {
+                title: 'Novidades',
+                params: { ...newsQuery, take: 15 },
+                queryDefault: newsQuery,
+            }
+
+            getSuggestions(bestSellersParam)
+            getSuggestions(bestOffersParam)
+            getSuggestions(newsParam)
         }
-        getBestSellers(bestSellersParam)
-    }, [getBestSellers])
+    }, [getSuggestions, suggestionsLength])
 
     const { productSuggestions } = props.suggestions
 
     const suggestionlist = productSuggestions.map((element, index) => {
-        return <Suggestion title={element.title} products={element.products} key={index} />
+        return (
+            <Suggestion
+                title={element.title}
+                clickTitle={clickTitleHandler}
+                query={element.query}
+                products={element.products}
+                key={index}
+            />
+        )
     })
 
     return <div>{suggestionlist}</div>
@@ -47,4 +70,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Suggestions)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onClickTitleHandler: (query) => dispatch(actions.setProductsQuery(query)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Suggestions)

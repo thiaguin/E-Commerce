@@ -1,12 +1,16 @@
 import React from 'react'
 import classes from './SearchBar.module.css'
 import searchIcon from '../../../../assets/search.svg'
+import * as actions from '../../../../store/actions/index'
+import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 const SearchBar = (props) => {
     const history = useHistory()
 
     const submitHandler = () => {
+        props.submit()
+        props.onSearch({ title: props.value })
         history.push('/products')
     }
 
@@ -31,4 +35,10 @@ const SearchBar = (props) => {
     )
 }
 
-export default SearchBar
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSearch: (query) => dispatch(actions.setProductsQuery(query)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SearchBar)

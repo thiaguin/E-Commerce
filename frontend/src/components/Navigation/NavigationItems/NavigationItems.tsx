@@ -8,9 +8,11 @@ import menuHoverSvg from '../../../assets/menuHover.svg'
 import Departments from './Departments/Departments'
 import * as actions from '../../../store/actions/index'
 import Aux from '../../hoc/Aux'
+import { useHistory } from 'react-router-dom'
 
 const NavigationItems = (props) => {
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const initGetDepartments = useCallback(() => dispatch(actions.getDepartment()), [dispatch])
     const { departments, categories } = props.navigation
@@ -25,7 +27,15 @@ const NavigationItems = (props) => {
     const navMultipleItemsWidth = ref?.current?.getBoundingClientRect()?.width
     const navMultipleItemsMargin = ref?.current?.getBoundingClientRect()?.x
 
-    const items = categories.map((element, index) => <NavigationItem item={element} key={index} />)
+    const categoriesClickHandler = ({ query, isFac }) => {
+        if (isFac) return history.push('/contactus')
+
+        props.onSelectItem(query)
+        history.push('/products')
+    }
+    const items = categories.map((element, index) => (
+        <NavigationItem item={element} click={categoriesClickHandler} key={index} />
+    ))
 
     const enterItemHandler = () => {
         setDepartmentsHovered(true)
@@ -43,6 +53,13 @@ const NavigationItems = (props) => {
 
     const hiddeDepartments = () => {
         setShowDepartment(false)
+    }
+
+    const onClickHandler = (query) => {
+        props.onSelectItem(query)
+        setShowDepartment(false)
+        setDepartmentsHovered(false)
+        history.push('/products')
     }
 
     useEffect(() => {
@@ -71,6 +88,7 @@ const NavigationItems = (props) => {
                 size={departmentSize}
                 enter={showDepartments}
                 leave={hiddeDepartments}
+                click={onClickHandler}
             />
         </Aux>
     )
@@ -79,7 +97,14 @@ const NavigationItems = (props) => {
 const mapStateToProps = (state) => {
     return {
         navigation: state.navigation,
+        products: state.products,
     }
 }
 
-export default connect(mapStateToProps)(NavigationItems)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSelectItem: (query) => dispatch(actions.setProductsQuery(query)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationItems)

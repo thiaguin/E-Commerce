@@ -57,23 +57,11 @@ export class PhotosService {
     async get(params: { id: number }, res: Response): Promise<void> {
         const photoRepository = getManager().getRepository(Photo)
         const photo = await photoRepository.findOne({ where: { id: params.id } })
-        return res.sendFile(path.resolve('..', 'backend', 'pictures', photo.filename))
-    }
 
-    fileIntercept = {
-        storage: diskStorage({
-            destination: path.resolve('..', 'backend', 'pictures'),
-            filename: (req, file, cb) => {
-                const newName = uuid()
-                const extension = path.extname(file.originalname)
-                const filename = `${newName}${extension}`
-                const { body } = req
-                const photo = { filename, originalName: file.originalname }
-                body.files = body.files ? [...body.files, photo] : [photo]
-                const extesionsAllowed = ['gif', 'jpg', 'jpeg', 'tiff', 'png']
-                if (!extesionsAllowed.includes(extension)) throw new HttpException('NotImage', 400)
-                cb(null, filename)
-            },
-        }),
+        if (photo) {
+            return res.sendFile(path.resolve('..', 'backend', 'pictures', photo.filename))
+        }
+
+        throw new HttpException('NotFound', 404)
     }
 }

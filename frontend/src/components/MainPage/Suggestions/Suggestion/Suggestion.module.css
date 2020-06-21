@@ -11,6 +11,11 @@
     color: grey;
 }
 
+.Suggestion h1:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .Carousel {
     width: 100%;
     box-sizing: border-box;

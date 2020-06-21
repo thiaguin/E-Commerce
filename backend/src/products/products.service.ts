@@ -28,7 +28,7 @@ export class ProductsService {
                 switch (key) {
                     case 'title':
                         const values = query[key].split(/\s+/)
-                        result[key] = Raw((alias) => values.map((value) => this.getIlike(alias, value)).join(' or '))
+                        result[key] = Raw((alias) => values.map((value) => this.getIlike(alias, value)).join(' and '))
                         break
                     case 'price':
                         const value = query[key]
@@ -52,7 +52,7 @@ export class ProductsService {
 
     private getPage(query) {
         const take = query.take || 30
-        const skip = query.skip * take || 0
+        const skip = query.page * take || 0
 
         return { take, skip }
     }
@@ -77,7 +77,7 @@ export class ProductsService {
         const order = this.getOrder(query)
 
         const [products, count] = await productRepository.findAndCount({
-            loadRelationIds: { relations: ['brand', 'category', 'photo'] },
+            loadRelationIds: { relations: ['brand', 'photo', 'category', 'department'] },
             where: where,
             order: order,
             ...this.getPage(query),
