@@ -34,7 +34,6 @@ export class CategoriesService {
 
     async getBrands(params: { id: number }): Promise<Brand[]> {
         const product = getManager().createQueryBuilder(Product, 'p')
-        console.log('here')
         return await product
             .select('DISTINCT b.id, b.name')
             .innerJoin(Brand, 'b', 'b.id = p.brand')

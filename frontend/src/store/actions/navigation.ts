@@ -44,7 +44,6 @@ export const getCategoriesFail = () => {
 }
 
 export const getCategoriesSuccess = (data) => {
-    console.log('act', data)
     return {
         type: actionTypes.GET_CATEGORIES_SUCCESS,
         departmentCategories: data,
