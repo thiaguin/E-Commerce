@@ -27,8 +27,20 @@ const NavigationItems = (props) => {
     const navMultipleItemsWidth = ref?.current?.getBoundingClientRect()?.width
     const navMultipleItemsMargin = ref?.current?.getBoundingClientRect()?.x
 
-    const categoriesClickHandler = ({ query, isFac }) => {
+    const categoriesClickHandler = ({ query, isFac, ...item }) => {
         if (isFac) return history.push('/contactus')
+
+        if (query && !query['order[field]']) {
+            const result: { name: string; values: string[] }[] = []
+
+            for (const key in query) {
+                result.push({ values: [key], name: item.name })
+            }
+
+            props.onSetFilters(result)
+        } else {
+            props.onSetFilters([])
+        }
 
         props.onSelectItem(query)
         history.push('/products')
@@ -55,7 +67,8 @@ const NavigationItems = (props) => {
         setShowDepartment(false)
     }
 
-    const onClickHandler = (query) => {
+    const onClickHandler = ({ query, name }) => {
+        props.onSetFilters([{ values: ['department'], name }])
         props.onSelectItem(query)
         setShowDepartment(false)
         setDepartmentsHovered(false)
@@ -104,6 +117,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSelectItem: (query) => dispatch(actions.setProductsQuery(query)),
+        onSetFilters: (value) => dispatch(actions.setFilters(value)),
     }
 }
 

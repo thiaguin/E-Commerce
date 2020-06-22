@@ -1,11 +1,32 @@
 import { Injectable, HttpException } from '@nestjs/common'
 import { Product } from './products.entity'
-import { getManager, Raw, Between, MoreThanOrEqual, Equal, LessThanOrEqual, getConnection } from 'typeorm'
+import {
+    Raw,
+    Between,
+    MoreThanOrEqual,
+    Equal,
+    LessThanOrEqual,
+    getConnection,
+    getRepository,
+    createQueryBuilder,
+    LessThan,
+    MoreThan,
+} from 'typeorm'
 import { CreateProductDto } from './dto/create-product.dto'
 import { Order } from 'src/orders/orders.entity'
 
 @Injectable()
 export class ProductsService {
+    private getRatingInterval(stars) {
+        const result = {
+            1: LessThanOrEqual(20),
+            2: Between(20, 40),
+            3: Between(40, 60),
+            4: Between(60, 80),
+            5: Between(80, 100),
+        }
+        return result[stars]
+    }
     private getQueryPrice(price) {
         if (price.min) return MoreThanOrEqual(price.min)
         if (price.max) return LessThanOrEqual(price.max)
@@ -31,8 +52,12 @@ export class ProductsService {
                         result[key] = Raw((alias) => values.map((value) => this.getIlike(alias, value)).join(' and '))
                         break
                     case 'price':
-                        const value = query[key]
-                        result[key] = value.min && value.max ? Between(value.min, value.max) : this.getQueryPrice(value)
+                        const price = query[key]
+                        result[key] = price.min && price.max ? Between(price.min, price.max) : this.getQueryPrice(price)
+                        break
+                    case 'rating':
+                        const rating = this.getRatingInterval(query[key])
+                        result[key] = rating
                         break
                     default:
                         result[key] = query[key]
@@ -58,7 +83,7 @@ export class ProductsService {
     }
 
     async findOne(params: { id: number }): Promise<Product> {
-        const productRepository = getManager().getRepository(Product)
+        const productRepository = getRepository(Product)
         const product = await productRepository.findOne({
             relations: ['brand'],
             where: { id: params.id },
@@ -72,7 +97,7 @@ export class ProductsService {
     }
 
     async findAll(query): Promise<{ products: Product[]; count: number }> {
-        const productRepository = getManager().getRepository(Product)
+        const productRepository = getRepository(Product)
         const where = this.getQuery(query)
         const order = this.getOrder(query)
 
@@ -87,15 +112,15 @@ export class ProductsService {
     }
 
     async create(body: CreateProductDto): Promise<Product> {
-        const productRepository = getManager().getRepository(Product)
+        const productRepository = getRepository(Product)
         const newProduct = productRepository.create(body)
         await productRepository.save(newProduct)
         return newProduct
     }
 
     async evaluate(params, body, user) {
-        const productRepository = getManager().getRepository(Product)
-        const qbOrder = getManager().createQueryBuilder(Order, 'order')
+        const productRepository = getRepository(Product)
+        const qbOrder = createQueryBuilder(Order, 'order')
 
         const product = await productRepository.findOne({ where: { id: params.id } })
         const order = await qbOrder
@@ -118,5 +143,14 @@ export class ProductsService {
         const statusCode = product ? 400 : 404
 
         throw new HttpException(message, statusCode)
+    }
+
+    async getMaxPrice(query): Promise<Product> {
+        const productRepository = getRepository(Product)
+        return await productRepository.findOne({
+            order: { price: 'DESC' },
+            select: ['price'],
+            where: this.getQuery(query),
+        })
     }
 }

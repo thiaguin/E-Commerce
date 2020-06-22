@@ -40,6 +40,19 @@ const addProductQuery = (state, action) => {
     }
 }
 
+const removeProductQuery = (state, action) => {
+    const newQuery = { ...state.query }
+
+    for (const element of action.query) {
+        delete newQuery[element]
+    }
+
+    return {
+        ...state,
+        query: newQuery,
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_PRODUCTS_SUCCESS:
@@ -50,6 +63,8 @@ const reducer = (state = initialState, action) => {
             return resetProductsQuery(state)
         case actionTypes.ADD_PRODUCTS_QUERY:
             return addProductQuery(state, action)
+        case actionTypes.REMOVE_PRODUCTS_QUERY:
+            return removeProductQuery(state, action)
         default:
             return {
                 ...state,

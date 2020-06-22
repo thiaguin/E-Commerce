@@ -15,6 +15,13 @@ export const addProductQuery = (query) => {
     }
 }
 
+export const removeProductQuery = (query) => {
+    return {
+        type: actionTypes.REMOVE_PRODUCTS_QUERY,
+        query: query,
+    }
+}
+
 export const resetProductsQuery = () => {
     return {
         type: actionTypes.RESET_PRODUCTS_QUERY,

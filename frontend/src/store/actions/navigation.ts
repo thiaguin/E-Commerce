@@ -90,3 +90,40 @@ export const getBrandsFilter = ({ entity, entityId }) => {
             })
     }
 }
+
+export const getMaxPriceStart = () => {
+    return {
+        type: actionTypes.GET_MAX_PRICE_START,
+    }
+}
+
+export const getMaxPriceFail = () => {
+    return {
+        type: actionTypes.GET_MAX_PRICE_FAIL,
+    }
+}
+
+export const getMaxPriceSuccess = ({ price }) => {
+    return {
+        type: actionTypes.GET_MAX_PRICE_SUCCESS,
+        maxPrice: price || 0,
+    }
+}
+
+export const getMaxPrice = (query) => {
+    return (dispatch) => {
+        axios
+            .get(`/products/maxPrice`, { params: query })
+            .then((response) => dispatch(getMaxPriceSuccess(response.data)))
+            .catch((error) => {
+                dispatch(getMaxPriceFail())
+            })
+    }
+}
+
+export const setFilters = (value) => {
+    return  {
+        type: actionTypes.SET_FILTERS,
+        value: value
+    }
+}

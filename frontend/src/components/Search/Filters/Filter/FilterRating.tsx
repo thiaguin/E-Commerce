@@ -16,7 +16,11 @@ const filterRating = (props) => {
         .map((_, index) => {
             const settings = { ...ratingSettings, rating: index + 1 }
             return (
-                <div key={index} className={classes.Rating}>
+                <div
+                    key={index}
+                    onClick={() => props.click(index + 1, `${index + 1} Estrelas`)}
+                    className={classes.Rating}
+                >
                     <StarRatings {...settings} />
                 </div>
             )

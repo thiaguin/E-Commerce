@@ -5,10 +5,13 @@ export {
     getDepartmentFail,
     getCategories,
     getBrandsFilter,
+    getMaxPrice,
+    setFilters,
 } from './navigation'
 export { getSuggestions, getSuggestionsStart, getSuggestionsSuccess, getSuggestionsFail } from './suggestion'
 export {
     addProductQuery,
+    removeProductQuery,
     getProducts,
     getProductsStart,
     getProductsSuccess,

@@ -10,6 +10,7 @@ const SearchBar = (props) => {
 
     const submitHandler = () => {
         props.submit()
+        props.onSetFilters([])
         props.onSearch({ title: props.value })
         history.push('/products')
     }
@@ -38,6 +39,7 @@ const SearchBar = (props) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSearch: (query) => dispatch(actions.setProductsQuery(query)),
+        onSetFilters: (value) => dispatch(actions.setFilters(value)),
     }
 }
 

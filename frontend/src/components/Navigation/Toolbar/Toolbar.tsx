@@ -33,7 +33,8 @@ const Toolbar = (props) => {
     }
 
     const onLogoClickHandler = () => {
-        props.onLogoClick()
+        props.onSetFilters([])
+        props.onResetProductsQuery()
         history.push('/')
     }
 
@@ -50,7 +51,8 @@ const Toolbar = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogoClick: () => dispatch(actions.resetProductsQuery()),
+        onResetProductsQuery: () => dispatch(actions.resetProductsQuery()),
+        onSetFilters: (value) => dispatch(actions.setFilters(value)),
     }
 }
 

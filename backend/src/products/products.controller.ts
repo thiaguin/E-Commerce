@@ -11,6 +11,11 @@ export class ProductsController {
         this.productService = new ProductsService()
     }
 
+    @Get('/maxPrice')
+    getMaxPrice(@Query() query): Promise<Product> {
+        return this.productService.getMaxPrice(query)
+    }
+
     @Get(':id')
     findOne(@Param() params: { id: number }): Promise<Product> {
         return this.productService.findOne(params)
