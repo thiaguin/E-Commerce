@@ -38,10 +38,9 @@ const Highlights = (props) => {
     const highlights = props.navigation?.highlights.map((element) => {
         const imageUrl = `${process.env.REACT_APP_BASE_URL}/highlights/photo/${element.id}`
         return (
-            <Aux>
+            <Aux key={element.id}>
                 <div
                     data-tip={element.description}
-                    key={element.id}
                     className={classes.Highlight}
                     onClick={() => onSelectHighlightHandler(element.query)}
                 >
