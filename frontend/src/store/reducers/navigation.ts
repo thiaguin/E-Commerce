@@ -18,6 +18,7 @@ const initialState = {
     brands: [],
     maxPrice: 0,
     filters: [],
+    highlights: [],
 }
 
 const getDepartmentsSuccess = (state, action) => {
@@ -69,6 +70,13 @@ const setFilters = (state, action) => {
     }
 }
 
+const getHighlights = (state, action) => {
+    return {
+        ...state,
+        highlights: action.highlights,
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_DEPARTMENTS_START:
@@ -84,6 +92,8 @@ const reducer = (state = initialState, action) => {
             return getBrandsFilter(state, action)
         case actionTypes.GET_MAX_PRICE_SUCCESS:
             return getMaxPrice(state, action)
+        case actionTypes.GET_HIGHLIGHTS_SUCCESS:
+            return getHighlights(state, action)
         case actionTypes.SET_FILTERS:
             return setFilters(state, action)
         default:

@@ -8,3 +8,9 @@
     display: inline-block;
     text-align: center;
 }
+
+@media (min-width: 1500px) {
+    .Toolbar {
+        height: 110px;
+    }
+}

@@ -9,7 +9,7 @@ import './App.css'
 const App = () => {
     return (
         <div>
-            <div style={{ position: 'fixed', width: '100%', top: 0, zIndex: 2 }}>
+            <div style={{ position: 'fixed', width: '100%', top: 0, zIndex: 1 }}>
                 <Toolbar />
                 <NavigationItems />
             </div>
@@ -41,7 +41,7 @@ const App = () => {
                 <Route
                     path="/contactus"
                     component={(props) => (
-                        <div style={{ marginTop: '115px' }}>
+                        <div>
                             <h1>Contact us</h1>
                         </div>
                     )}

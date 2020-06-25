@@ -9,6 +9,7 @@ import { PhotosModule } from './photos/photos.module'
 import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
 import { OrdersModule } from './orders/orders.module'
+import { HighlightsModule } from './highlights/highlights.module'
 
 const metadata: ModuleMetadata = {
     imports: [
@@ -21,6 +22,7 @@ const metadata: ModuleMetadata = {
         UsersModule,
         AuthModule,
         OrdersModule,
+        HighlightsModule,
     ],
     controllers: [],
     providers: [],

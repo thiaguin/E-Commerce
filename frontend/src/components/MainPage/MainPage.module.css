@@ -1,3 +1,10 @@
 .MainPage {
     scroll-behavior: smooth;
+    margin-top: '115px';
+}
+
+@media (min-width: 1500px) {
+    .MainPage {
+        margin-top: 145rpx;
+    }
 }

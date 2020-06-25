@@ -7,7 +7,7 @@ import classes from './MainPage.module.css'
 const mainPage = (props) => {
     return (
         <Aux>
-            <div className={classes.MainPage} style={{ marginTop: '115px' }}>
+            <div className={classes.MainPage}>
                 <Highlights />
                 <Suggestions />
             </div>

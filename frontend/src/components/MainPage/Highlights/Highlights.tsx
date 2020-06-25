@@ -1,13 +1,21 @@
-import React from 'react'
-import mainImg from '../../../assets/background.png'
-import shanks from '../../../assets/shanks.jpg'
+import React, { useEffect, useCallback } from 'react'
 import * as ResponsiveCarousel from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import classes from './Highlights.module.css'
+import { useDispatch, connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import ReactTooltip from 'react-tooltip'
+import Aux from '../../hoc/Aux'
+import * as actions from '../../../store/actions/index'
 
+const Tooltip: React.HTMLElement = ReactTooltip
 const Carousel: React.Component = ResponsiveCarousel.Carousel
 
-const highlights = (props) => {
+const Highlights = (props) => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const initHighlights = useCallback((params) => dispatch(actions.getHighlights()), [dispatch])
+
     const settings = {
         interval: 3500,
         transitionTime: 500,
@@ -18,14 +26,49 @@ const highlights = (props) => {
         showStatus: false,
     }
 
+    useEffect(() => {
+        initHighlights()
+    }, [initHighlights])
+
+    const onSelectHighlightHandler = (query) => {
+        props.onSelectItem(query)
+        history.push('/products')
+    }
+
+    const highlights = props.navigation?.highlights.map((element) => {
+        const imageUrl = `${process.env.REACT_APP_BASE_URL}/highlights/photo/${element.id}`
+        return (
+            <Aux>
+                <div
+                    data-tip={element.description}
+                    key={element.id}
+                    className={classes.Highlight}
+                    onClick={() => onSelectHighlightHandler(element.query)}
+                >
+                    <img src={imageUrl} alt="main"></img>
+                </div>
+                <Tooltip type="light" backgroundColor="#f0f0d0" />
+            </Aux>
+        )
+    })
+
     return (
         <div className={classes.Highlights}>
-            <Carousel {...settings}>
-                <img src={mainImg} alt="main"></img>
-                <img src={shanks} alt="logo"></img>
-            </Carousel>
+            {props.navigation?.highlights?.length > 0 && <Carousel {...settings}>{highlights}</Carousel>}
         </div>
     )
 }
 
-export default highlights
+const mapStateToProps = (state) => {
+    return {
+        navigation: state.navigation,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSelectItem: (query) => dispatch(actions.setProductsQuery(query)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Highlights)

@@ -7,6 +7,7 @@ export {
     getBrandsFilter,
     getMaxPrice,
     setFilters,
+    getHighlights,
 } from './navigation'
 export { getSuggestions, getSuggestionsStart, getSuggestionsSuccess, getSuggestionsFail } from './suggestion'
 export {

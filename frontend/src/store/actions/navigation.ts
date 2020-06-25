@@ -121,9 +121,39 @@ export const getMaxPrice = (query) => {
     }
 }
 
+export const getHighlightsStart = () => {
+    return {
+        type: actionTypes.GET_HIGHLIGHTS_START,
+    }
+}
+
+export const getHighlightsFail = () => {
+    return {
+        type: actionTypes.GET_HIGHLIGHTS_FAIL,
+    }
+}
+
+export const getHighlightsSuccess = (data) => {
+    return {
+        type: actionTypes.GET_HIGHLIGHTS_SUCCESS,
+        highlights: data,
+    }
+}
+
+export const getHighlights = () => {
+    return (dispatch) => {
+        axios
+            .get(`/highlights`)
+            .then((response) => dispatch(getHighlightsSuccess(response.data)))
+            .catch((error) => {
+                dispatch(getHighlightsFail())
+            })
+    }
+}
+
 export const setFilters = (value) => {
-    return  {
+    return {
         type: actionTypes.SET_FILTERS,
-        value: value
+        value: value,
     }
 }
