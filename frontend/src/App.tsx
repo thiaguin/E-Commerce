@@ -3,6 +3,7 @@ import Toolbar from './components/Navigation/Toolbar/Toolbar'
 import NavigationItems from './components/Navigation/NavigationItems/NavigationItems'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import MainPage from './components/MainPage/MainPage'
+import Product from './components/Product/Product'
 import Search from './components/Search/Search'
 import './App.css'
 
@@ -46,6 +47,7 @@ const App = () => {
                         </div>
                     )}
                 />
+                <Route path="/products/show/:id" render={(props) => <Product {...props} />} />
                 <Route path="/products" render={(props) => <Search {...props} />} />
                 <Route path="/" render={(props) => <MainPage {...props} />} />
             </Switch>

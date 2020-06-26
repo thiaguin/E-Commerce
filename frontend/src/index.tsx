@@ -9,12 +9,14 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import navigationReducer from './store/reducers/navigation'
 import suggestionsReducer from './store/reducers/suggestions'
 import productsReducer from './store/reducers/products'
+import productReducer from './store/reducers/product'
 import thunk from 'redux-thunk'
 
 const reducers = combineReducers({
     navigation: navigationReducer,
     suggestions: suggestionsReducer,
     products: productsReducer,
+    product: productReducer,
 })
 
 declare global {

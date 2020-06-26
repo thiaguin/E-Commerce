@@ -85,7 +85,7 @@ export class ProductsService {
     async findOne(params: { id: number }): Promise<Product> {
         const productRepository = getRepository(Product)
         const product = await productRepository.findOne({
-            relations: ['brand'],
+            relations: ['brand', 'photos'],
             where: { id: params.id },
         })
 

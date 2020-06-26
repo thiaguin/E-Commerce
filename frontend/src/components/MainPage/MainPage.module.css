@@ -3,7 +3,7 @@
     margin-top: '115px';
 }
 
-@media (min-width: 1500px) {
+@media (min-width: 1700px) {
     .MainPage {
         margin-top: 145rpx;
     }

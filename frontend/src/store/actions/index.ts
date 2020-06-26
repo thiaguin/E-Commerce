@@ -20,3 +20,4 @@ export {
     setProductsQuery,
     resetProductsQuery,
 } from './products'
+export { getProduct } from './product'

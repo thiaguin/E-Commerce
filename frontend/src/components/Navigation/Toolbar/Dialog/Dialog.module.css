@@ -14,13 +14,13 @@ h1 {
     font-size: 0.9em;
 }
 
-p {
+.Dialog p {
     color: gray;
     margin: 0;
     font-size: 0.8em;
 }
 
-p:hover {
+.Dialog p:hover {
     text-decoration: underline;
     cursor: pointer;
 }

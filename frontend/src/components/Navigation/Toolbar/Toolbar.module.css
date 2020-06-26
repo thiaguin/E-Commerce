@@ -9,7 +9,7 @@
     text-align: center;
 }
 
-@media (min-width: 1500px) {
+@media (min-width: 1700px) {
     .Toolbar {
         height: 110px;
     }
