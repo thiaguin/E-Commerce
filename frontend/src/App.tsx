@@ -5,6 +5,7 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 import MainPage from './components/MainPage/MainPage'
 import Product from './components/Product/Product'
 import Search from './components/Search/Search'
+import ShoppingCart from './components/ShoppingCart/ShoppingCart'
 import './App.css'
 
 const App = () => {
@@ -23,14 +24,7 @@ const App = () => {
                         </div>
                     )}
                 />
-                <Route
-                    path="/shopping"
-                    component={(props) => (
-                        <div>
-                            <h1>Shopping</h1>
-                        </div>
-                    )}
-                />
+                <Route path="/shopping" render={(props) => <ShoppingCart {...props} />} />
                 <Route
                     path="/login"
                     component={(props) => (

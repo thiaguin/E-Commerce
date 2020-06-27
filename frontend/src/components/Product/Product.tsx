@@ -6,12 +6,14 @@ import Aux from '../hoc/Aux'
 import StarRatings from 'react-star-ratings'
 import heartIcon from '../../assets/heart.svg'
 import carIcon from '../../assets/car.svg'
+import { HashLink as Link } from 'react-router-hash-link'
 import * as actions from '../../store/actions/index'
 import 'react-image-gallery/styles/css/image-gallery.css'
-import { HashLink as Link } from 'react-router-hash-link'
+import { useHistory } from 'react-router-dom'
 
 const Product = (props) => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const initProduct = useCallback((params) => dispatch(actions.getProduct(params)), [dispatch])
     const productId = props.match.params.id
     const product = props.product?.data
@@ -56,6 +58,31 @@ const Product = (props) => {
         initProduct({ id: productId })
     }, [initProduct, productId])
 
+    const technicianInformation = () => {
+        const result: React.HTMLElement[] = []
+
+        for (const key in product.technicalInformation) {
+            result.push(
+                <li className={classes.RowTechnicalInformation} key={key}>
+                    <p className={classes.TitleTechnicalInformation}>{key}</p>
+                    <p className={classes.ValueTechnicalInformation}>{product.technicalInformation[key]}</p>
+                </li>
+            )
+        }
+        return result
+    }
+
+    const addOnCartHandler = () => {
+        const shoppingCart = localStorage.getItem('shoppingCart')
+
+        const cartList = shoppingCart?.split(',')
+        const cartListSet = cartList?.filter((element) => element !== `${product.id}`)
+        const cartUpdated = cartListSet ? [...cartListSet, product.id] : [product.id]
+
+        localStorage.setItem('shoppingCart', cartUpdated.join(','))
+        history.push('/shopping')
+    }
+
     return (
         <div>
             {product && (
@@ -80,7 +107,7 @@ const Product = (props) => {
                             <Link style={{ textDecoration: 'none' }} to="#description">
                                 <p className={classes.DescriptionCard}>{product.description}</p>
                             </Link>
-                            <button className={classes.Car}>
+                            <button onClick={addOnCartHandler} className={classes.Car}>
                                 <p>Adicionar ao carrinho</p>
                                 <img src={carIcon} alt="car" />
                             </button>
@@ -95,8 +122,9 @@ const Product = (props) => {
                     </h5>
                     <p className={classes.Description}>{product.description}</p>
                     <h5 className={classes.ProductTag} id="description">
-                        Informação Técnica //todo
+                        Informação Técnica
                     </h5>
+                    <ul>{technicianInformation()}</ul>
                 </Aux>
             )}
         </div>

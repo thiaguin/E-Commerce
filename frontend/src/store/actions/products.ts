@@ -47,7 +47,7 @@ export const getProductsSuccess = (data) => {
     }
 }
 
-export const getProducts = ({ params, title }) => {
+export const getProducts = ({ params }) => {
     return (dispatch) => {
         axios
             .get('/products', {

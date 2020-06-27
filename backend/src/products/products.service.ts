@@ -11,6 +11,7 @@ import {
     createQueryBuilder,
     LessThan,
     MoreThan,
+    In,
 } from 'typeorm'
 import { CreateProductDto } from './dto/create-product.dto'
 import { Order } from 'src/orders/orders.entity'
@@ -60,7 +61,7 @@ export class ProductsService {
                         result[key] = rating
                         break
                     default:
-                        result[key] = query[key]
+                        result[key] = Array.isArray(query[key]) ? In(query[key]) : query[key]
                 }
             }
         }
@@ -101,6 +102,7 @@ export class ProductsService {
         const where = this.getQuery(query)
         const order = this.getOrder(query)
 
+        console.log('qurey', where)
         const [products, count] = await productRepository.findAndCount({
             loadRelationIds: { relations: ['brand', 'photo', 'category', 'department'] },
             where: where,

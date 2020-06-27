@@ -161,6 +161,53 @@
     text-justify: inter-word;
 }
 
+.TitleTechnicalInformation {
+    display: table-cell;
+    height: fit-content;
+    min-width: 250px;
+    max-width: 250px;
+    background-color: lightgrey;
+    box-sizing: border-box;
+    padding: 7px;
+    margin-left: 15px;
+    text-align: justify;
+    justify-content: left;
+    word-wrap: break-word;
+    border: 1px solid lightgrey;
+    margin-bottom: 3px;
+    margin-top: 5px;
+    padding-bottom: 10px;
+    color: #303030;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.RowTechnicalInformation {
+    display: table-row;
+    border-collapse: separate;
+    border-spacing: 5em;
+}
+
+.ValueTechnicalInformation {
+    display: table-cell;
+    min-width: 780px;
+    max-width: 780px;
+    height: fit-content;
+    border: 1px solid lightgrey;
+    box-sizing: border-box;
+    padding: 7px;
+    text-align: justify;
+    justify-content: left;
+    word-wrap: break-word;
+    margin-bottom: 3px;
+    margin-top: 0;
+    color: #707070;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
 @media (max-width: 830px) {
     .Product {
         display: block;

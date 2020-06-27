@@ -1,0 +1,180 @@
+.Cart {
+    display: inline-block;
+    border-top: 1px solid lightgray;
+    /* margin-bottom: 15px; */
+    position: relative;
+}
+
+.Last {
+    padding-bottom: 45px;
+    border-bottom: 1px solid lightgray;
+}
+
+.Cart img {
+    display: inline-block;
+    margin-top: 15px;
+    padding-left: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+.CartInfo {
+    display: inline-block;
+    width: 500px;
+}
+
+.CartInfo h3 {
+    color: grey;
+    font-size: 1em;
+    margin-top: 15px;
+    margin-left: 15px;
+    display: block;
+    text-align: left;
+}
+
+.CartInfo h4 {
+    color: gray;
+    margin-top: 40px;
+    font-size: 0.9em;
+    text-align: left;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.Input {
+    display: inline-block;
+}
+
+.Input h5 {
+    margin-top: 0;
+    display: block;
+    font-size: 0.9em;
+    color: grey;
+    margin-top: 25px;
+}
+
+.Input input {
+    display: block;
+    width: 150px;
+    text-align: center;
+    margin: auto;
+    margin-top: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input {
+    text-decoration-color: red;
+}
+
+.Price {
+    display: inline-block;
+    margin-top: 25px;
+    padding-right: 20px;
+}
+
+.Price h3 {
+    color: grey;
+    margin: 0;
+    margin-left: 30px;
+}
+
+.Price h4 {
+    margin-top: 35px;
+    margin-left: 30px;
+    color: gray;
+}
+
+.Remove {
+    text-align: right;
+    box-sizing: border-box;
+    margin-right: 20px;
+    width: fit-content;
+    right: 0;
+    margin-bottom: 15px;
+    border: 1px solid grey;
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 0.2em;
+    position: absolute;
+    margin-top: 10px;
+}
+
+.Remove h6 {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1em;
+    color: grey;
+    margin: 0;
+}
+
+.Remove img {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-top: 0;
+    padding-left: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.Remove:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.Remove:hover h6 {
+    color: #585858;
+}
+
+@media (max-width: 950px) {
+    .CartInfo {
+        width: 300px;
+    }
+}
+
+@media (max-width: 720px) {
+    .CartInfo {
+        display: block;
+        text-align: center;
+    }
+
+    .CartInfo h4 {
+        width: auto;
+        margin: auto;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .CartInfo h3 {
+        text-align: center;
+        margin-top: 50px;
+        width: auto;
+    }
+
+    .CartInfo h3 {
+        margin: 0;
+    }
+
+    .Price {
+        display: block;
+        padding: 0;
+    }
+    .Price h4 {
+        margin: 0;
+        margin-top: 5px;
+    }
+
+    .Price h3 {
+        margin: 0;
+        margin-top: 5px;
+    }
+
+    .Input input {
+        margin-top: 5px;
+    }
+
+    .Input h5 {
+        margin: 15px 0;
+    }
+}

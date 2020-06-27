@@ -1,0 +1,85 @@
+.ShoppingCart {
+    margin-top: 115px;
+}
+
+.EmptyCart {
+    font-size: 2em;
+    text-align: center;
+    margin: auto;
+    left: 20%;
+    right: 20%;
+    top: 50%;
+    margin: auto;
+    position: absolute;
+    display: block;
+}
+
+.ShoppingCart h2 {
+    display: block;
+    position: relative;
+    margin-left: 40px;
+    margin-top: 145px;
+    color: gray;
+}
+
+.Finish {
+    float: right;
+    margin-right: 5%;
+    margin-bottom: 30px;
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 0 40px;
+    background-color: #56ccf2;
+    border: 1px solid grey;
+    color: gray;
+    font-size: 1em;
+    border-radius: 0.2em;
+}
+
+.Finish:hover {
+    cursor: pointer;
+    background-color: #61dafb;
+    color: grey;
+}
+
+.Continue {
+    float: left;
+    margin-left: 5%;
+    margin-bottom: 30px;
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 0 35px;
+    background-color: seashell;
+    border: 1px solid grey;
+    color: gray;
+    font-size: 1em;
+    border-radius: 0.2em;
+}
+
+.Continue:hover {
+    cursor: pointer;
+    background-color: lightgray;
+    color: grey;
+}
+
+.Back {
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 0 35px;
+    background-color: seashell;
+    border: 1px solid grey;
+    color: gray;
+    font-size: 0.4em;
+    border-radius: 0.2em;
+    display: inline-block;
+}
+
+.Back:hover {
+    cursor: pointer;
+    background-color: lightgray;
+    color: grey;
+}
+
+.Buttons {
+    margin-top: 50px;
+}
