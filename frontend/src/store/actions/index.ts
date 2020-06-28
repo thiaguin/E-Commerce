@@ -21,3 +21,4 @@ export {
     resetProductsQuery,
 } from './products'
 export { getProduct } from './product'
+export { setIsAuthPage, userLogin, userSignup, authCheck, authLogout } from './auth'

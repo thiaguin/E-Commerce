@@ -2,8 +2,11 @@ import React from 'react'
 import classes from './ToolbarItem.module.css'
 
 const toolbarItem = (props) => {
+    const classesName = [classes.ToolbarItem]
+    props.isLogout && classesName.push(classes.Car)
+
     return (
-        <div className={classes.ToolbarItem} onClick={props.click}>
+        <div className={classesName.join(' ')} onClick={props.click}>
             <img src={props.icon} alt="icon" />
         </div>
     )

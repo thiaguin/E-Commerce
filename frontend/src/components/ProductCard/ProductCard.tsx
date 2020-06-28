@@ -20,7 +20,7 @@ const ProductCard = (props) => {
         starSpacing: '2px',
     }
 
-    const [src, setSrc] = useState(`${BASE_URL}/photos/${product.photo}`)
+    const [src, setSrc] = useState(`${BASE_URL}/photos/filename/${product.filename}`)
 
     const classCss = [classes.ProductCard]
 

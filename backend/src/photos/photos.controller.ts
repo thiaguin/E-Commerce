@@ -16,14 +16,19 @@ export class PhotosController {
         this.photoService = new PhotosService()
     }
 
-    @Get('/:id')
-    async get(@Param() params: { id: number }, @Res() res: Response): Promise<void> {
-        return this.photoService.get(params, res)
-    }
-
     @Get('/datas/:productId')
     async getImagesData(@Param() params: ProductParamsDTO) {
         return this.photoService.getImagesData(params)
+    }
+
+    @Get('/filename/:name')
+    async getByFilename(@Param() params: { name: string }, @Res() res: Response): Promise<void> {
+        return this.photoService.getByFilename(params, res)
+    }
+
+    @Get('/:id')
+    async get(@Param() params: { id: number }, @Res() res: Response): Promise<void> {
+        return this.photoService.get(params, res)
     }
 
     @Post('upload/:productId')

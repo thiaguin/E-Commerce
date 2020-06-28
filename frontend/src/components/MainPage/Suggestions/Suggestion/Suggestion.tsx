@@ -73,7 +73,8 @@ const Suggestion = (props) => {
 
     useEffect(() => {
         setItemsPerPage(getItemsPerPage())
-    }, [getItemsPerPage, width])
+    }, [setItemsPerPage, getItemsPerPage])
+
     return (
         <div className={classes.Suggestion}>
             <h1 onClick={() => props.clickTitle(props.query)}>{props.title}</h1>

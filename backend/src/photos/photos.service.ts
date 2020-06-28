@@ -24,7 +24,7 @@ export class PhotosService {
             const productRepository = getManager().getRepository(Product)
             const promises = []
 
-            let mainPhoto: Photo
+            let mainPhoto: string
 
             for (const file of body.files) {
                 const { filename, originalName } = file
@@ -32,7 +32,7 @@ export class PhotosService {
                 const newPhoto = photoRepository.create({ filename, product: params.productId })
                 const promiseSave = transactionManager.save(newPhoto)
 
-                if (isMain) mainPhoto = newPhoto
+                if (isMain) mainPhoto = newPhoto.filename
 
                 promises.push(promiseSave)
             }
@@ -41,7 +41,7 @@ export class PhotosService {
 
             if (mainPhoto) {
                 const product = await productRepository.findOne({ where: { id: params.productId } })
-                product.photo = mainPhoto
+                product.filename = mainPhoto
                 await transactionManager.save(product)
             }
 
@@ -57,6 +57,17 @@ export class PhotosService {
     async get(params: { id: number }, res: Response): Promise<void> {
         const photoRepository = getManager().getRepository(Photo)
         const photo = await photoRepository.findOne({ where: { id: params.id } })
+
+        if (photo) {
+            return res.sendFile(path.resolve('..', 'backend', 'pictures', photo.filename))
+        }
+
+        throw new HttpException('NotFound', 404)
+    }
+
+    async getByFilename(params: { name: string }, res: Response): Promise<void> {
+        const photoRepository = getManager().getRepository(Photo)
+        const photo = await photoRepository.findOne({ where: { filename: params.name } })
 
         if (photo) {
             return res.sendFile(path.resolve('..', 'backend', 'pictures', photo.filename))

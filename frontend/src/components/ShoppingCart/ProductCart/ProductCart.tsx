@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import crashSvg from '../../../assets/crash.svg'
 import Aux from '../../hoc/Aux'
 import classes from './ProductCart.module.css'
 
 const ProductCart = (props) => {
     const product = props.product
-
     const quantity = props.itemQuantity?.[product.id] || 1
 
-    const image = `${process.env.REACT_APP_BASE_URL}/photos/${product.photo}`
+    const image = `${process.env.REACT_APP_BASE_URL}/photos/filename/${product.filename}`
 
     const inputChangeHandler = (event) => {
         const value = event.target.value

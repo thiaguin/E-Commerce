@@ -52,6 +52,9 @@ export class Product {
     @Column('integer', { default: 0 })
     discount: number
 
+    @Column({ nullable: true })
+    filename: string
+
     @ManyToOne(() => Brand, (brand) => brand.id, { nullable: false, cascade: true })
     @JoinColumn()
     brand: Brand
@@ -69,9 +72,6 @@ export class Product {
 
     @OneToMany(() => Photo, (photo) => photo.product)
     photos: Photo[]
-
-    @ManyToOne(() => Photo, (photo) => photo.id, { nullable: true })
-    photo: Photo
 
     @CreateDateColumn({ type: 'timestamp with time zone' })
     createdAt: string
