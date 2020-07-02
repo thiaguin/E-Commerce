@@ -5,6 +5,7 @@ import ProductCard from '../../ProductCard/ProductCard'
 import Pagination from '../Pagination/Pagination'
 import * as actions from '../../../store/actions/index'
 import { connect, useDispatch } from 'react-redux'
+import Spinner from '../../Spinner/Spinner'
 
 const Products = (props) => {
     const dispatch = useDispatch()
@@ -62,6 +63,9 @@ const Products = (props) => {
             return <ProductCard isFull={true} key={element.id} product={element} />
         })
     }
+    const pagination = (
+        <Pagination click={changePageHanlder} count={props.products.count} current={page} itemsPerPage={itemsPerPage} />
+    )
 
     return (
         <div className={classes.Products}>
@@ -87,15 +91,8 @@ const Products = (props) => {
                     className={classes.SelectQuantity}
                 />
             </div>
-            {productsList}
-            {props.products.count > 0 && (
-                <Pagination
-                    click={changePageHanlder}
-                    count={props.products.count}
-                    current={page}
-                    itemsPerPage={itemsPerPage}
-                />
-            )}
+            {props.products?.loading ? <Spinner className="LoaderFetchProducts" /> : productsList}
+            {!props.products?.loading && props.products.count > 0 && pagination}
         </div>
     )
 }

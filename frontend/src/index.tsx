@@ -11,6 +11,7 @@ import suggestionsReducer from './store/reducers/suggestions'
 import productsReducer from './store/reducers/products'
 import productReducer from './store/reducers/product'
 import authReducer from './store/reducers/auth'
+import orderReducer from './store/reducers/order'
 import thunk from 'redux-thunk'
 
 const reducers = combineReducers({
@@ -19,6 +20,7 @@ const reducers = combineReducers({
     products: productsReducer,
     product: productReducer,
     auth: authReducer,
+    order: orderReducer,
 })
 
 declare global {

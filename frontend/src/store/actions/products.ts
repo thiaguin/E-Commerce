@@ -49,13 +49,10 @@ export const getProductsSuccess = (data) => {
 
 export const getProducts = ({ params }) => {
     return (dispatch) => {
+        dispatch(getProductsStart())
         axios
-            .get('/products', {
-                params,
-            })
+            .get('/products', { params })
             .then((response) => dispatch(getProductsSuccess(response.data)))
-            .catch((error) => {
-                dispatch(getProductsFail())
-            })
+            .catch((error) => dispatch(getProductsFail()))
     }
 }

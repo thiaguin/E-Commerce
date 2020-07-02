@@ -54,6 +54,14 @@
     border-radius: 0.2em;
 }
 
+.Test {
+    margin-top: 5px;
+    margin-right: 0;
+    width: 10px;
+    height: 10px;
+    margin-left: 25px;
+}
+
 .Login:hover {
     cursor: pointer;
     background-color: #61dafb;

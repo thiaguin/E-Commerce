@@ -12,6 +12,7 @@ export const setIsAuthPage = (value) => {
 export const userLoginStart = () => {
     return {
         type: actionTypes.USER_LOGIN_START,
+        loading: false,
     }
 }
 
@@ -36,6 +37,7 @@ export const userLoginSuccess = ({ token }) => {
 
 export const userLogin = (body) => {
     return (dispatch) => {
+        dispatch(userLoginStart())
         axios
             .post('/auth/login', body)
             .then((response) => dispatch(userLoginSuccess(response.data)))
@@ -47,6 +49,7 @@ export const userLogin = (body) => {
 
 export const userSignup = (body) => {
     return (dispatch) => {
+        dispatch(userLoginStart())
         axios
             .post('/users', body)
             .then((response) => dispatch(userLogin(body)))
@@ -91,8 +94,14 @@ export const authCheck = () => {
                 dispatch(authLogout())
             }
         } else {
-            console.log('askjd')
             dispatch(authLogout())
         }
+    }
+}
+
+export const setRedirectPath = (path) => {
+    return {
+        type: actionTypes.SET_REDIRECT_PATH,
+        pathToRedirect: path
     }
 }

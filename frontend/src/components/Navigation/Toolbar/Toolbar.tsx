@@ -7,12 +7,10 @@ import ToolbarItem from './ToolbarItem/ToolbarItem'
 import heartIcon from '../../../assets/heart.svg'
 import carIcon from '../../../assets/car.svg'
 import logoutIcon from '../../../assets/logout.svg'
-import ReactTooltip from 'react-tooltip'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../../../store/actions/index'
 
-const Tooltip: React.HTMLElement = ReactTooltip
 
 const Toolbar = (props) => {
     const history = useHistory()
@@ -57,10 +55,10 @@ const Toolbar = (props) => {
             <Logo click={onLogoClickHandler} />
             <SearchBar submit={onSubmitHandler} value={productSearch} changed={(event) => inputHandlerChange(event)} />
             <Dialog auth={props.auth} click={dialogClickHandle} />
-            <ToolbarItem data-tip="Favoritos" icon={heartIcon} click={() => toolbarItemClickHanler('heart')} />
-            <ToolbarItem data-tip="Carrinho" icon={carIcon} click={() => toolbarItemClickHanler('car')} />
+            <ToolbarItem dataTip="Favoritos" icon={heartIcon} click={() => toolbarItemClickHanler('heart')} />
+            <ToolbarItem dataTip="Carrinho" icon={carIcon} click={() => toolbarItemClickHanler('car')} />
             {props.auth?.token && (
-                <ToolbarItem data-tip="Sair" icon={logoutIcon} click={onLogoutClickHandler} isLogout={true} />
+                <ToolbarItem dataTip="Sair" icon={logoutIcon} click={onLogoutClickHandler} isLogout={true} />
             )}
         </div>
     )

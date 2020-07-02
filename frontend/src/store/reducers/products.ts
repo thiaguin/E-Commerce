@@ -4,6 +4,7 @@ const initialState = {
     query: {},
     products: [],
     count: 0,
+    loading: false,
 }
 
 const getProductsSuccess = (state, action) => {
@@ -11,6 +12,7 @@ const getProductsSuccess = (state, action) => {
         ...state,
         products: [...action.productsFetched.products],
         count: action.productsFetched.count,
+        loading: false,
     }
 }
 
@@ -53,6 +55,13 @@ const removeProductQuery = (state, action) => {
     }
 }
 
+const getProductStart = (state, action) => {
+    return {
+        ...state,
+        loading: true,
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_PRODUCTS_SUCCESS:
@@ -65,6 +74,8 @@ const reducer = (state = initialState, action) => {
             return addProductQuery(state, action)
         case actionTypes.REMOVE_PRODUCTS_QUERY:
             return removeProductQuery(state, action)
+        case actionTypes.GET_PRODUCTS_START:
+            return getProductStart(state, action)
         default:
             return {
                 ...state,

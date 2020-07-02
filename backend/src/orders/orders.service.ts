@@ -44,12 +44,16 @@ export class OrdersService {
             for (const currentProduct of products) {
                 const product = await transactionManager.findOne(Product, { where: { id: currentProduct.id } })
 
+                if (!product) throw new HttpException('NotFound', 404)
+
+                const productPrice = Math.round(product.price * ((100 - product.discount) / 100))
+
                 if (product.stockQuantity - currentProduct.quantity < 0) throw new HttpException('BadRequest', 400)
 
                 const productOrder = transactionManager.create(ProductOrder, {
                     orderId: newOrder.id,
                     productId: product.id,
-                    productPrice: product.price,
+                    productPrice: productPrice,
                     productQuantity: currentProduct.quantity,
                 })
 

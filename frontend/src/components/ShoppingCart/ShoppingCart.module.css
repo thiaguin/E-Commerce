@@ -5,7 +5,6 @@
 .EmptyCart {
     font-size: 2em;
     text-align: center;
-    margin: auto;
     left: 20%;
     right: 20%;
     top: 50%;
@@ -62,6 +61,10 @@
     color: grey;
 }
 
+.Finish:hover:disabled {
+    cursor: not-allowed;
+}
+
 .Back {
     width: fit-content;
     box-sizing: border-box;
@@ -82,4 +85,94 @@
 
 .Buttons {
     margin-top: 50px;
+}
+
+.Select {
+    display: inline-block;
+    margin-top: 10px;
+    width: 220px;
+}
+
+.SelectQuantity {
+    display: inline-block;
+    margin-top: 10px;
+    width: 80px;
+}
+
+.Freight {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    justify-content: space-between;
+    display: flex;
+}
+
+.FreightLeft h3 {
+    margin-right: 20px;
+    display: inline-block;
+    color: grey;
+}
+
+.Freight h4 {
+    color: grey;
+}
+
+.FreightMissed h4 {
+    color: #ff4d4d;
+    text-decoration: line-through;
+}
+
+.Cep {
+    width: 70%;
+    margin: auto;
+    margin-bottom: 20px;
+    text-align: center;
+    justify-content: space-between;
+    display: flex;
+}
+
+.Cep h3 {
+    margin-right: 28px;
+    display: inline-block;
+    color: grey;
+}
+
+.Cep h4 {
+    /* text-align: right; */
+    /* right: 0; */
+    color: grey;
+}
+
+.Cep input {
+    display: inline-block;
+    margin-top: 10px;
+    width: 100px;
+    height: 25px;
+    border: 1.3px solid lightgrey;
+    border-radius: 0.2em;
+}
+
+.Cep button {
+    display: inline-block;
+    margin-left: 30px;
+    height: 30px;
+    padding: 0 10px;
+    color: grey;
+    border: 1px solid lightgrey;
+    box-sizing: border-box;
+    border-radius: 0.2em;
+}
+
+.Cep button:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+    color: dimgrey;
+}
+
+.Cep button:hover:disabled {
+    cursor: not-allowed;
+}
+
+.Cep input:focus {
+    outline-color: dodgerblue;
 }

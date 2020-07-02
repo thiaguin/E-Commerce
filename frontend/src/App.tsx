@@ -9,6 +9,7 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 import * as actions from './store/actions/index'
 import './App.css'
 import { connect, useDispatch } from 'react-redux'
+import Order from './components/Order/Order'
 
 const App = (props) => {
     const dispatch = useDispatch()
@@ -55,7 +56,7 @@ const App = (props) => {
                         </div>
                     )}
                 />
-                <Route path="/shopping" render={(props) => <ShoppingCart {...props} />} />
+                <Route path="/auth" render={(props) => <Auth {...props} />} />
                 <Route
                     path="/contactus"
                     component={(props) => (
@@ -64,6 +65,8 @@ const App = (props) => {
                         </div>
                     )}
                 />
+                <Route path="/shopping/order" render={(props) => <Order {...props} />} />
+                <Route path="/shopping" render={(props) => <ShoppingCart {...props} />} />
                 <Route path="/products/show/:id" render={(props) => <Product {...props} />} />
                 <Route path="/products" render={(props) => <Search {...props} />} />
                 <Route path="/" render={(props) => <MainPage {...props} />} />

@@ -1,7 +1,6 @@
 .Cart {
     display: inline-block;
     border-top: 1px solid lightgray;
-    /* margin-bottom: 15px; */
     position: relative;
 }
 
