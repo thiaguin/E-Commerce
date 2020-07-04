@@ -11,7 +11,6 @@ import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../../../store/actions/index'
 
-
 const Toolbar = (props) => {
     const history = useHistory()
     const { onAuthCheck } = props
@@ -22,8 +21,8 @@ const Toolbar = (props) => {
         setProductSearch(value)
     }
 
-    const dialogClickHandle = () => {
-        history.push('/auth')
+    const dialogClickHandle = (route) => {
+        history.push(route)
     }
 
     const toolbarItemClickHanler = (item) => {

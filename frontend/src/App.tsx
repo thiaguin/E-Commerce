@@ -12,6 +12,8 @@ import { connect, useDispatch } from 'react-redux'
 import Order from './components/Order/Order'
 import Erro from './components/Erro/Erro'
 import Success from './components/Success/Success'
+import Orders from './components/Orders/Orders'
+import OrderPage from './components/Orders/OrderPage/OrderPage'
 
 const App = (props) => {
     const dispatch = useDispatch()
@@ -67,6 +69,8 @@ const App = (props) => {
                         </div>
                     )}
                 />
+                <Route path="/orders/show/:id" render={(props) => <OrderPage {...props} />} />
+                <Route path="/orders" render={(props) => <Orders {...props} />} />
                 <Route path="/shopping/order/success" render={(props) => <Success {...props} />} />
                 <Route path="/shopping/order/error" render={(props) => <Erro {...props} />} />
                 <Route path="/shopping/order" render={(props) => <Order {...props} />} />

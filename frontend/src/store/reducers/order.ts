@@ -8,6 +8,7 @@ const initialState = {
     postLoading: false,
     postSuccess: false,
     postErro: false,
+    evaluate: [],
 }
 
 const setFinishingOrder = (state, action) => {
@@ -58,6 +59,7 @@ const makeOrderFail = (state, action) => {
 
 const resetOrder = (state, action) => {
     return {
+        ...state,
         isFinishing: false,
         products: [],
         localization: null,
@@ -65,6 +67,21 @@ const resetOrder = (state, action) => {
         postLoading: false,
         postSuccess: false,
         postErro: false,
+        evaluate: [],
+    }
+}
+
+const evaluateProduct = (state, action) => {
+    return {
+        ...state,
+        evaluate: [
+            ...state.evaluate,
+            {
+                rating: action.data.yours,
+                productOrderId: action.productOrderId,
+                productId: action.productId,
+            },
+        ],
     }
 }
 
@@ -84,6 +101,8 @@ const reducer = (state = initialState, action) => {
             return makeOrderFail(state, action)
         case actionTypes.RESET_ORDER:
             return resetOrder(state, action)
+        case actionTypes.EVALUATE_PRODUCT_SUCCESS:
+            return evaluateProduct(state, action)
         default:
             return {
                 ...state,

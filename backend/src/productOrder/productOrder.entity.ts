@@ -5,7 +5,7 @@ import { Product } from 'src/products/products.entity'
 @Entity()
 export class ProductOrder {
     @PrimaryGeneratedColumn()
-    productOrderId: number
+    id: number
 
     @Column()
     orderId: number
@@ -18,6 +18,9 @@ export class ProductOrder {
 
     @Column()
     productQuantity: number
+
+    @Column({ default: 0 })
+    evaluate: number
 
     @ManyToOne(() => Order, (order) => order.productOrder)
     order: Order

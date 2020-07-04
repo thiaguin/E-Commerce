@@ -1,0 +1,107 @@
+.OrderPage {
+    margin-top: 115px;
+}
+
+.OrderPage h1 {
+    font-size: 1.5em;
+    margin-top: 145px;
+    margin-left: 30px;
+}
+
+.OrderProduct {
+    text-align: center;
+    border-bottom: 1px solid lightgrey;
+    padding: 20px 0;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.OrderProduct img {
+    display: inline-block;
+    margin-top: 15px;
+    padding-left: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+.ProductTitle {
+    display: inline-block;
+    width: 400px;
+    vertical-align: top;
+    margin-top: 30px;
+}
+
+.ProductTitle h3 {
+    color: grey;
+    font-size: 1em;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-bottom: 0;
+    /* display: block; */
+    text-align: left;
+}
+
+.ProductTitle h4 {
+    color: gray;
+    margin-top: 40px;
+    font-size: 0.8em;
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 10px;
+    display: block;
+}
+
+.ProductPrice {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 30px;
+    width: 150px;
+}
+
+.ProductPrice h3 {
+    margin-top: 10px;
+    margin-bottom: 0;
+    color: grey;
+}
+
+.ProductEvaluate {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 30px;
+    width: 150px;
+}
+
+.ProductEvaluate h3 {
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: grey;
+}
+
+.PriceCard {
+    display: inline-block;
+    width: 170px;
+    padding: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin: 15px;
+    border: 1px solid grey;
+    height: 100px;
+    position: relative;
+    background-color: lightgrey;
+    border-radius: 0.2em;
+}
+
+.PriceCard h3 {
+    text-align: center;
+    color: grey;
+}
+
+.PriceCard h4 {
+    color: grey;
+}

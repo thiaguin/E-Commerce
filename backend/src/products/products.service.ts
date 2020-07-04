@@ -12,9 +12,11 @@ import {
     LessThan,
     MoreThan,
     In,
+    getManager,
 } from 'typeorm'
 import { CreateProductDto } from './dto/create-product.dto'
 import { Order } from 'src/orders/orders.entity'
+import { ProductOrder } from 'src/productOrder/productOrder.entity'
 
 @Injectable()
 export class ProductsService {
@@ -120,30 +122,35 @@ export class ProductsService {
     }
 
     async evaluate(params, body, user) {
-        const productRepository = getRepository(Product)
-        const qbOrder = createQueryBuilder(Order, 'order')
+        return await getManager().transaction(async (transactionManager) => {
+            const qbOrder = createQueryBuilder(Order, 'order')
 
-        const product = await productRepository.findOne({ where: { id: params.id } })
-        const order = await qbOrder
-            .where(`order.user = ${user.id}`)
-            .leftJoin('order.productOrder', 'productOrder', `productOrder.productId = ${params.id}`)
-            .getOne()
+            const productOrder = await transactionManager.findOne(ProductOrder, { where: { id: body.productOrderId } })
+            const product = await transactionManager.findOne(Product, { where: { id: params.id } })
+            const order = await qbOrder
+                .where(`order.user = ${user.id}`)
+                .leftJoin('order.productOrder', 'productOrder', `productOrder.productId = ${params.id}`)
+                .getOne()
 
-        if (order && product) {
-            const { rating, ratingQuantity } = product
-            const newRating = (rating * ratingQuantity + body.rating) / (ratingQuantity + 1)
+            if (order && product) {
+                const { rating, ratingQuantity } = product
+                const newRating = (rating * ratingQuantity + body.rating) / (ratingQuantity + 1)
 
-            product.rating = Math.round(newRating)
-            product.ratingQuantity += 1
+                product.rating = Math.round(newRating)
+                product.ratingQuantity += 1
+                productOrder.evaluate = body.rating
 
-            await productRepository.save(product)
-            return { rating: newRating, yours: body.rating }
-        }
+                await transactionManager.save(Product, product)
+                await transactionManager.save(ProductOrder, productOrder)
 
-        const message = product ? 'BadRequest' : 'NotFound'
-        const statusCode = product ? 400 : 404
+                return { rating: newRating, yours: body.rating }
+            }
 
-        throw new HttpException(message, statusCode)
+            const message = product ? 'BadRequest' : 'NotFound'
+            const statusCode = product ? 400 : 404
+
+            throw new HttpException(message, statusCode)
+        })
     }
 
     async getMaxPrice(query): Promise<Product> {

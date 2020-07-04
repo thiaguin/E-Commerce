@@ -16,7 +16,7 @@ export class ProductsController {
         return this.productService.getMaxPrice(query)
     }
 
-    @Get(':id')
+    @Get('/:id')
     findOne(@Param() params: { id: number }): Promise<Product> {
         return this.productService.findOne(params)
     }
@@ -26,13 +26,13 @@ export class ProductsController {
         return this.productService.findAll(query)
     }
 
+    @Post('/evaluate/:id')
+    evaluate(@Param() params, @Body() body, @Req() req) {
+        return this.productService.evaluate(params, body, req.user)
+    }
+
     @Post()
     create(@Body() body: CreateProductDto): Promise<Product> {
         return this.productService.create(body)
-    }
-
-    @Post('evaluate/:id')
-    evaluate(@Param() params, @Body() body, @Req() req) {
-        return this.productService.evaluate(params, body, req.user)
     }
 }

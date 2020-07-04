@@ -66,8 +66,6 @@ const Order = (props) => {
         props.onMakeOrder({ order, token: props.auth.token })
     }
 
-    console.log('props', props)
-
     return (
         <div style={{ marginTop: '115px' }}>
             {props.order.postSuccess && <Redirect to="/shopping/order/success" />}

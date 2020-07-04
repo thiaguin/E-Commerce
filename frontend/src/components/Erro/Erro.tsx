@@ -16,9 +16,6 @@ const Erro = (props) => {
         onResetOrder()
     }, [onResetOrder])
 
-    console.log(historyAction)
-    console.log('props history', props.history)
-
     useEffect(() => {
         if (historyAction !== 'REPLACE') {
             history.push('/')

@@ -5,6 +5,7 @@ import { Product } from 'src/products/products.entity'
 import { CreateOrderDTO } from './dto/create-order.dto'
 import { ProductOrder } from 'src/productOrder/productOrder.entity'
 import { PayloadUserDTO } from 'src/users/dto/payload-user.dto'
+import { Console } from 'console'
 
 @Injectable()
 export class OrdersService {
@@ -14,22 +15,28 @@ export class OrdersService {
 
         if (user?.role !== 'ADMIN') where.user = user.id
 
-        return await orderRepository.findOne({
-            where: { id: params.id, user: user.id },
+        const order = await orderRepository.findOne({
+            where: where,
             relations: ['user', 'productOrder', 'productOrder.product'],
         })
+
+        if (order) {
+            return order
+        }
+
+        throw new HttpException('NotFound', 404)
     }
 
     async findAll(user: PayloadUserDTO): Promise<Order[]> {
         const orderRepository = getManager().getRepository(Order)
         const query: FindManyOptions<Order> = {
             loadRelationIds: { relations: ['user'] },
-            order: { createdAt: 'DESC' },
+            order: { createdAt: 'ASC' },
         }
 
         if (user?.role !== 'ADMIN') query.where = { user: user.id }
 
-        return await orderRepository.find()
+        return await orderRepository.find(query)
     }
 
     async create(body: CreateOrderDTO): Promise<Order> {
@@ -57,7 +64,7 @@ export class OrdersService {
                     productQuantity: currentProduct.quantity,
                 })
 
-                totalPrice += product.price * currentProduct.quantity
+                totalPrice += productPrice * currentProduct.quantity
 
                 product.saleQuantity += +currentProduct.quantity
                 product.stockQuantity -= +currentProduct.quantity

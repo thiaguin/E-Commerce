@@ -78,6 +78,36 @@ export const makerOrder = ({ order, token }) => {
 
 export const resetOrder = () => {
     return {
-        type: actionTypes.RESET_ORDER
+        type: actionTypes.RESET_ORDER,
+    }
+}
+
+export const evaluateProductStart = () => {
+    return {
+        type: actionTypes.EVALUATE_PRODUCT_START,
+    }
+}
+
+export const evaluateProductFail = () => {
+    return {
+        type: actionTypes.EVALUATE_PRODUCT_FAIL,
+    }
+}
+
+export const evaluateProductSuccess = (data, productId, body) => {
+    return {
+        type: actionTypes.EVALUATE_PRODUCT_SUCCESS,
+        data: data,
+        productId: productId,
+        productOrderId: body.productOrderId,
+    }
+}
+
+export const evaluateProduct = ({ productId, body, token }) => {
+    return (dispatch) => {
+        axiosInstance
+            .post(`/products/evaluate/${productId}`, body, { headers: { Authorization: token } })
+            .then((response) => dispatch(evaluateProductSuccess(response.data, productId, body)))
+            .catch((error) => dispatch(evaluateProductFail()))
     }
 }
