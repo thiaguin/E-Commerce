@@ -59,8 +59,8 @@ export class OrdersService {
 
                 totalPrice += product.price * currentProduct.quantity
 
-                product.saleQuantity += currentProduct.quantity
-                product.stockQuantity -= currentProduct.quantity
+                product.saleQuantity += +currentProduct.quantity
+                product.stockQuantity -= +currentProduct.quantity
 
                 await transactionManager.save(product)
                 await transactionManager.save(productOrder)

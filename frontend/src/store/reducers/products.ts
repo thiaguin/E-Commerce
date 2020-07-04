@@ -23,7 +23,7 @@ const setProductsQuery = (state, action) => {
     }
 }
 
-const resetProductsQuery = (state) => {
+const resetProductsQuery = (state, action) => {
     return {
         ...state,
         query: {},
@@ -69,13 +69,15 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SET_PRODUCTS_QUERY:
             return setProductsQuery(state, action)
         case actionTypes.RESET_PRODUCTS_QUERY:
-            return resetProductsQuery(state)
+            return resetProductsQuery(state, action)
         case actionTypes.ADD_PRODUCTS_QUERY:
             return addProductQuery(state, action)
         case actionTypes.REMOVE_PRODUCTS_QUERY:
             return removeProductQuery(state, action)
         case actionTypes.GET_PRODUCTS_START:
             return getProductStart(state, action)
+        case actionTypes.MAKE_ORDER_SUCCESS:
+            return resetProductsQuery(state, action)
         default:
             return {
                 ...state,

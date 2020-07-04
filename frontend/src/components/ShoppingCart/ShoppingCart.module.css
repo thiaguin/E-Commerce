@@ -125,7 +125,7 @@
 .Cep {
     width: 70%;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
     justify-content: space-between;
     display: flex;
@@ -138,8 +138,6 @@
 }
 
 .Cep h4 {
-    /* text-align: right; */
-    /* right: 0; */
     color: grey;
 }
 

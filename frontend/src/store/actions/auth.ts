@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes'
 import axios from '../../axios'
-import { act } from '@testing-library/react'
 
 export const setIsAuthPage = (value) => {
     return {

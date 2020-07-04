@@ -102,7 +102,6 @@ export class ProductsService {
         const where = this.getQuery(query)
         const order = this.getOrder(query)
 
-        console.log('qurey', where)
         const [products, count] = await productRepository.findAndCount({
             loadRelationIds: { relations: ['brand', 'photo', 'category', 'department'] },
             where: where,

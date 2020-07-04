@@ -5,6 +5,7 @@ import { BrandsService } from './brands.service'
 import { BrandsController } from './brands.controller'
 import { ModuleMetadata } from '@nestjs/common/interfaces'
 import { AuthenticateMiddleware } from 'src/auth/auth.middleware'
+import { Router } from 'express'
 
 const metadata: ModuleMetadata = {
     imports: [TypeOrmModule.forFeature([Brand])],
@@ -12,7 +13,6 @@ const metadata: ModuleMetadata = {
     controllers: [BrandsController],
     exports: [],
 }
-
 @Module(metadata)
 export class BrandsModule implements NestModule {
     public configure(consumer: MiddlewareConsumer) {

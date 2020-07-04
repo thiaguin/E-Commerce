@@ -36,6 +36,13 @@ const ShoppingCart = (props) => {
         { value: 'FASTEST', label: 'Expressa' },
     ]
 
+    const freightValues = {
+        NONE: 0,
+        FASTEST: 10000,
+        COMMOM: 5000,
+        CHEAPEST: 1000,
+    }
+
     const freighClasses = finishDisabled ? [classes.Freight, classes.FreightMissed] : [classes.Freight]
 
     const onRemoveHandler = (productId) => {
@@ -103,6 +110,7 @@ const ShoppingCart = (props) => {
         const products: any[] = []
         const propsProducts = props.products?.products
         const path = props.auth?.token ? '/shopping/order' : '/auth'
+        const freightType = { type: freight, price: freightValues[freight] }
 
         for (const propsProduct of propsProducts) {
             const product = {
@@ -117,7 +125,7 @@ const ShoppingCart = (props) => {
 
         props.onFinishOrder()
         props.onSetRedirectPath('/shopping/order')
-        props.onSetProductsOrder(products)
+        props.onSetOrder({ freight: freightType, products })
 
         history.push(path)
     }
@@ -158,14 +166,7 @@ const ShoppingCart = (props) => {
     }
 
     const getFreightPrice = (type) => {
-        const values = {
-            NONE: 0,
-            FASTEST: 10000,
-            COMMOM: 5000,
-            CHEAPEST: 1000,
-        }
-
-        const value = (values[type] || values['NONE']) / 100
+        const value = (freightValues[type] || freightValues['NONE']) / 100
 
         return value.toLocaleString('pt-br', {
             style: 'currency',
@@ -213,25 +214,27 @@ const ShoppingCart = (props) => {
                     <div className={classes.Cep}>
                         <div>
                             <h3>CEP</h3>
-                            <input value={cep.label} onChange={inputChangeHandler} />
+                            <input value={props.order?.localization?.cep || cep.label} onChange={inputChangeHandler} />
                             <button onClick={clickSearchCepHandler} disabled={!cep.valid}>
                                 Pesquisar
                             </button>
                         </div>
                         {props.order.localization && cepLocalization}
                     </div>
-                    <div className={freighClasses.join(' ')}>
-                        <div className={classes.FreightLeft}>
-                            <h3>Frete</h3>
-                            <Select
-                                onChange={selectChangeHandler}
-                                options={orderOptions}
-                                placeholder="Selecione..."
-                                className={classes.Select}
-                            />
+                    {props.order.localization && !props.order.localization.erro && (
+                        <div className={freighClasses.join(' ')}>
+                            <div className={classes.FreightLeft}>
+                                <h3>Frete</h3>
+                                <Select
+                                    onChange={selectChangeHandler}
+                                    options={orderOptions}
+                                    placeholder="Selecione..."
+                                    className={classes.Select}
+                                />
+                            </div>
+                            <h4>{getFreightPrice(freight)}</h4>
                         </div>
-                        <h4>{getFreightPrice(freight)}</h4>
-                    </div>
+                    )}
                     <div className={classes.Buttons}>
                         <button onClick={continueClickHandler} className={classes.Continue}>
                             <p>Continuar Comprando</p>
@@ -263,7 +266,7 @@ const mapDispatchToProps = (dispatch) => {
         onClearQuery: () => dispatch(actions.setProductsQuery({})),
         onFinishOrder: () => dispatch(actions.setFinishingOrder()),
         onSetRedirectPath: (path) => dispatch(actions.setRedirectPath(path)),
-        onSetProductsOrder: (value) => dispatch(actions.setProductsOrder(value)),
+        onSetOrder: (value) => dispatch(actions.setOrder(value)),
         onGetLocalization: (value) => dispatch(actions.getLocalization(value)),
     }
 }

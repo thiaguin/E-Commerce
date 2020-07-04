@@ -1,0 +1,25 @@
+.Erro {
+    margin-top: 300px;
+    text-align: center;
+}
+
+.Erro h1 {
+    font-size: 2em;
+}
+
+.Erro button {
+    height: 30px;
+    padding: 0 10px;
+    color: grey;
+    border: 1px solid lightgrey;
+    box-sizing: border-box;
+    border-radius: 0.2em;
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+.Erro button:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+    color: dimgrey;
+}

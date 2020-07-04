@@ -22,4 +22,4 @@ export {
 } from './products'
 export { getProduct } from './product'
 export { setIsAuthPage, userLogin, userSignup, authCheck, authLogout, setRedirectPath } from './auth'
-export { setFinishingOrder, setProductsOrder, getLocalization } from './order'
+export { setFinishingOrder, setOrder, getLocalization, makerOrder, resetOrder } from './order'

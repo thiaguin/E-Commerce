@@ -45,7 +45,6 @@ export class HighlightsController {
                     req.body.filename = filename
 
                     if (extesionsAllowed.includes(extension)) {
-                        console.log('her')
                         cb(null, filename)
                     } else {
                         cb(new Error(), 'false')

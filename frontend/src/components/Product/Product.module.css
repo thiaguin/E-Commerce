@@ -19,7 +19,6 @@
     text-align: left;
     margin-bottom: 20px;
     color: gray;
-    /* display: inline; */
 }
 
 .Images {
@@ -37,7 +36,6 @@
     display: inline-block;
     height: 400px;
     margin-left: 30px;
-    /* border: 1px solid grey; */
 }
 
 .Card h2 {
@@ -49,7 +47,6 @@
 .Card h3 {
     color: grey;
     margin: 0;
-    /* font-size: 2em; */
 }
 
 .Card h4 {
@@ -217,12 +214,9 @@ li {
 
     .Images {
         margin: auto;
-
-        /* position: absolute; */
     }
 
     .Card {
-        /* display: block; */
         margin: auto;
         margin-top: 20px;
         text-align: center;

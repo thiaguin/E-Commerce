@@ -10,6 +10,8 @@ import * as actions from './store/actions/index'
 import './App.css'
 import { connect, useDispatch } from 'react-redux'
 import Order from './components/Order/Order'
+import Erro from './components/Erro/Erro'
+import Success from './components/Success/Success'
 
 const App = (props) => {
     const dispatch = useDispatch()
@@ -65,6 +67,8 @@ const App = (props) => {
                         </div>
                     )}
                 />
+                <Route path="/shopping/order/success" render={(props) => <Success {...props} />} />
+                <Route path="/shopping/order/error" render={(props) => <Erro {...props} />} />
                 <Route path="/shopping/order" render={(props) => <Order {...props} />} />
                 <Route path="/shopping" render={(props) => <ShoppingCart {...props} />} />
                 <Route path="/products/show/:id" render={(props) => <Product {...props} />} />

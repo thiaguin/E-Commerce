@@ -1,4 +1,55 @@
 .Order {
-    margin-top: 115px;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 15%;
 }
 
+.OrderCard {
+    display: inline-block;
+    width: 200px;
+    padding: 20px;
+    padding-bottom: 10px;
+    padding-top: 40px;
+    margin: 15px;
+    border: 1px solid grey;
+    height: 150px;
+    position: relative;
+    background-color: lightgrey;
+    border-radius: 0.2em;
+}
+
+.OrderCard h2 {
+    text-align: center;
+    color: grey;
+}
+
+.OrderCard h3 {
+    color: grey;
+}
+
+.OrderButton {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.OrderButton button {
+    background-color: #56ccf2;
+    display: inline-block;
+    margin-left: 30px;
+    height: 45px;
+    width: 150px;
+    padding: 0 10px;
+    color: dimgrey;
+    font-size: 1em;
+    border: 1px solid dimgrey;
+    box-sizing: border-box;
+    border-radius: 0.2em;
+}
+
+.OrderButton button:hover {
+    cursor: pointer;
+    background-color: #61dafb;
+    color: grey;
+    border: 1px solid grey;
+}
