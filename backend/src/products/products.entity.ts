@@ -16,6 +16,7 @@ import { Brand } from '../brands/brands.entity'
 import { Category } from 'src/categories/categories.entity'
 import { ProductOrder } from 'src/productOrder/productOrder.entity'
 import { Department } from 'src/departments/departments.entity'
+import { Favorite } from 'src/favorites/favorites.entity'
 
 @Entity()
 export class Product {
@@ -72,6 +73,9 @@ export class Product {
 
     @OneToMany(() => Photo, (photo) => photo.product)
     photos: Photo[]
+
+    @OneToMany(() => Favorite, (favorite) => favorite.product)
+    favorite?: Favorite[]
 
     @CreateDateColumn({ type: 'timestamp with time zone' })
     createdAt: string

@@ -56,3 +56,13 @@ export const getProducts = ({ params }) => {
             .catch((error) => dispatch(getProductsFail()))
     }
 }
+
+export const getFavoritesProducts = ({ token }) => {
+    return (dispatch) => {
+        dispatch(getProductsStart())
+        axios
+            .get('/products/favorites', { headers: { Authorization: token } })
+            .then((response) => dispatch(getProductsSuccess(response.data)))
+            .catch((error) => dispatch(getProductsFail()))
+    }
+}

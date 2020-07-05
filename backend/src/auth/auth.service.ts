@@ -46,11 +46,21 @@ export class AuthService {
             if (bcrypt.compareSync(body.password, user.password)) {
                 const { id, username, role } = user
                 return { token: this.jwtService.sign({ id, username, role }) }
-            } else {
-                throw new HttpException('BadRequest', 400)
             }
         }
 
         throw new HttpException('NotFound', 404)
+    }
+
+    async getUser(headers: IncomingHttpHeaders): Promise<PayloadUserDTO> {
+        const token = headers.authorization
+
+        if (token) {
+            const { id, username, role } = this.jwtService.verify(token)
+            const userRepository = getManager().getRepository(User)
+            const user = await userRepository.findOne({ where: { id, username, role } })
+
+            if (user) return { id, username, role }
+        }
     }
 }

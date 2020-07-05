@@ -7,6 +7,7 @@ const initialState = {
     userId: null,
     loading: false,
     pathToRedirect: '/',
+    erro: null,
 }
 
 const userLogin = (state, action) => {
@@ -37,6 +38,7 @@ const authSucces = (state, action) => {
         token: token,
         username: username,
         userId: userId,
+        pathToRedirect: '/',
     }
 }
 
@@ -65,6 +67,7 @@ const authFail = (state, action) => {
     return {
         ...state,
         loading: false,
+        erro: action.erro?.response?.data?.message,
     }
 }
 

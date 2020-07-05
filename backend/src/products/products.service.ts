@@ -17,6 +17,14 @@ import {
 import { CreateProductDto } from './dto/create-product.dto'
 import { Order } from 'src/orders/orders.entity'
 import { ProductOrder } from 'src/productOrder/productOrder.entity'
+import { Favorite } from 'src/favorites/favorites.entity'
+import { User } from 'src/users/users.entity'
+import { CreateFavoritesDTO } from 'src/favorites/dto/create-favorites.enity'
+import { PayloadUserDTO } from 'src/users/dto/payload-user.dto'
+import { Brand } from 'src/brands/brands.entity'
+import { Photo } from 'src/photos/photos.entity'
+import { GetProductDTO } from './dto/get-product.dto'
+import { identity } from 'rxjs'
 
 @Injectable()
 export class ProductsService {
@@ -85,7 +93,7 @@ export class ProductsService {
         return { take, skip }
     }
 
-    async findOne(params: { id: number }): Promise<Product> {
+    async findOne(params: { id: number }, user): Promise<GetProductDTO> {
         const productRepository = getRepository(Product)
         const product = await productRepository.findOne({
             relations: ['brand', 'photos'],
@@ -93,7 +101,17 @@ export class ProductsService {
         })
 
         if (product) {
-            return product
+            const result = { ...product, isFavorite: false }
+
+            if (user) {
+                const favorite = await getRepository(Favorite).findOne({
+                    where: { productId: product.id, userId: user.id },
+                })
+
+                result.isFavorite = !!favorite
+            }
+
+            return result
         }
 
         throw new HttpException('NotFound', 404)
@@ -160,5 +178,46 @@ export class ProductsService {
             select: ['price'],
             where: this.getQuery(query),
         })
+    }
+
+    async makeFavorite(params: { id: number }, user: PayloadUserDTO): Promise<Favorite> {
+        const productRepository = getRepository(Product)
+        const favoriteRepository = getRepository(Favorite)
+
+        const product = await productRepository.findOne({ where: { id: params.id } })
+
+        if (user) {
+            const favorite = favoriteRepository.create({
+                productId: product.id,
+                userId: user.id,
+            })
+
+            await favoriteRepository.save(favorite)
+            return favorite
+        } else {
+            throw new HttpException('NotFound', 404)
+        }
+    }
+
+    async removeFavorite(params: { id: number }, user: PayloadUserDTO) {
+        const favoriteRepository = getRepository(Favorite)
+
+        if (params?.id && user?.id) {
+            await favoriteRepository.delete({ productId: params.id, userId: user.id })
+        }
+    }
+
+    async getFavorites(user: PayloadUserDTO): Promise<{ products: Product[]; count: number }> {
+        const product = getRepository(Product).createQueryBuilder('p')
+        const [products, count] = await product
+            .select()
+            .innerJoin('p.favorite', 'favorite')
+            .loadRelationIdAndMap('brand', 'p.brand')
+            .loadRelationIdAndMap('category', 'p.category')
+            .loadRelationIdAndMap('department', 'p.department')
+            .where(`favorite.userId = ${user.id}`)
+            .getManyAndCount()
+
+        return { products, count }
     }
 }

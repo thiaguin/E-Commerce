@@ -1,5 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BeforeInsert } from 'typeorm'
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    CreateDateColumn,
+    UpdateDateColumn,
+    BeforeInsert,
+    OneToMany,
+} from 'typeorm'
 import * as bcrypt from 'bcrypt'
+import { Favorite } from 'src/favorites/favorites.entity'
 
 @Entity()
 export class User {
@@ -20,6 +29,9 @@ export class User {
 
     @UpdateDateColumn({ type: 'timestamp with time zone' })
     updatedAt: string
+
+    @OneToMany(() => Favorite, (favorite) => favorite.user)
+    favorite?: Favorite[]
 
     @BeforeInsert()
     cryptPassword() {

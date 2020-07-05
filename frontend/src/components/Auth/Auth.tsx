@@ -6,6 +6,7 @@ import background from '../../assets/e-commerce.png'
 import Spinner from '../Spinner/Spinner'
 import Aux from '../hoc/Aux'
 import { Redirect } from 'react-router-dom'
+import Popup from '../Popup/Popup'
 
 const Auth = (props) => {
     const { onSetIsAuthPage } = props
@@ -45,13 +46,21 @@ const Auth = (props) => {
     }
 
     const isAuth = props.auth?.token ? <Redirect to={redirectPath} /> : null
+    const erro = props.auth?.erro
+    const [popup, setPopup] = useState(null)
+
+    useEffect(() => {
+        if (erro) {
+            setPopup(<Popup type="error" message={erro} />)
+        }
+    }, [erro])
 
     useEffect(() => {
         onSetIsAuthPage(true)
     }, [onSetIsAuthPage])
 
     useEffect(() => {
-        if (!isFinishinOrder && redirectPath !== '/') {
+        if (!isFinishinOrder && redirectPath === '/shopping/order') {
             authRedirect('/')
         }
     }, [authRedirect, isFinishinOrder, redirectPath])
@@ -94,6 +103,7 @@ const Auth = (props) => {
                     )}
                 </div>
             </div>
+            {popup}
         </Aux>
     )
 }

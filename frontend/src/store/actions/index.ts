@@ -14,13 +14,11 @@ export {
     addProductQuery,
     removeProductQuery,
     getProducts,
-    getProductsStart,
-    getProductsSuccess,
-    getProductsFail,
     setProductsQuery,
     resetProductsQuery,
+    getFavoritesProducts,
 } from './products'
-export { getProduct } from './product'
+export { getProduct, addFavorite, removeFavorite } from './product'
 export { setIsAuthPage, userLogin, userSignup, authCheck, authLogout, setRedirectPath } from './auth'
 export { setFinishingOrder, setOrder, getLocalization, makerOrder, resetOrder, evaluateProduct } from './order'
 export { getOrders, getOrder } from './orders'

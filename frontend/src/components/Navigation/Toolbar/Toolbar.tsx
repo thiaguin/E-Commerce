@@ -27,6 +27,8 @@ const Toolbar = (props) => {
 
     const toolbarItemClickHanler = (item) => {
         const route = item === 'car' ? '/shopping' : '/wishes'
+        if (item === 'heart' && !props.auth?.token) props.onSetRedirectPath(route)
+
         history.push(route)
     }
 
@@ -74,6 +76,7 @@ const mapDispatchToProps = (dispatch) => {
         onSetFilters: (value) => dispatch(actions.setFilters(value)),
         onAuthCheck: () => dispatch(actions.authCheck()),
         onLogout: () => dispatch(actions.authLogout()),
+        onSetRedirectPath: (path) => dispatch(actions.setRedirectPath(path)),
     }
 }
 

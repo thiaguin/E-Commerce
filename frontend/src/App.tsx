@@ -14,6 +14,7 @@ import Erro from './components/Erro/Erro'
 import Success from './components/Success/Success'
 import Orders from './components/Orders/Orders'
 import OrderPage from './components/Orders/OrderPage/OrderPage'
+import Favorites from './components/Favorites/Favorites'
 
 const App = (props) => {
     const dispatch = useDispatch()
@@ -25,14 +26,7 @@ const App = (props) => {
 
     let routes = (
         <Switch>
-            <Route
-                path="/wishes"
-                component={(props) => (
-                    <div>
-                        <h1>Wishes</h1>
-                    </div>
-                )}
-            />
+            <Route path="/wishes" component={(props) => <Favorites {...props} />} />
             <Route path="/shopping" render={(props) => <ShoppingCart {...props} />} />
             <Route path="/auth" render={(props) => <Auth {...props} />} />
             <Route
@@ -52,14 +46,7 @@ const App = (props) => {
     if (props.isAuth) {
         routes = (
             <Switch>
-                <Route
-                    path="/wishes"
-                    component={(props) => (
-                        <div>
-                            <h1>Wishes</h1>
-                        </div>
-                    )}
-                />
+                <Route path="/wishes" component={(props) => <Favorites {...props} />} />
                 <Route path="/auth" render={(props) => <Auth {...props} />} />
                 <Route
                     path="/contactus"

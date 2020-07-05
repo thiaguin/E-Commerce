@@ -15,15 +15,17 @@ export const userLoginStart = () => {
     }
 }
 
-export const userLoginFail = () => {
+export const userLoginFail = (error) => {
     return {
         type: actionTypes.USER_LOGIN_FAIL,
+        erro: error,
     }
 }
 
-export const userSignupFail = () => {
+export const userSignupFail = (error) => {
     return {
         type: actionTypes.USER_SIGNUP_FAIL,
+        erro: error,
     }
 }
 
@@ -41,7 +43,7 @@ export const userLogin = (body) => {
             .post('/auth/login', body)
             .then((response) => dispatch(userLoginSuccess(response.data)))
             .catch((error) => {
-                dispatch(userLoginFail())
+                dispatch(userLoginFail(error))
             })
     }
 }
@@ -53,7 +55,7 @@ export const userSignup = (body) => {
             .post('/users', body)
             .then((response) => dispatch(userLogin(body)))
             .catch((error) => {
-                dispatch(userLoginFail())
+                dispatch(userSignupFail(error))
             })
     }
 }
@@ -101,6 +103,6 @@ export const authCheck = () => {
 export const setRedirectPath = (path) => {
     return {
         type: actionTypes.SET_REDIRECT_PATH,
-        pathToRedirect: path
+        pathToRedirect: path,
     }
 }
