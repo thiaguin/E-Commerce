@@ -5,7 +5,7 @@ import classes from './Highlights.module.css'
 import { useDispatch, connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import ReactTooltip from 'react-tooltip'
-import Aux from '../../hoc/Aux'
+import Aux from '../../../components/hoc/Aux'
 import * as actions from '../../../store/actions/index'
 
 const Tooltip: React.HTMLElement = ReactTooltip

@@ -3,7 +3,7 @@ import classes from './Favorites.module.css'
 import * as actions from '../../store/actions/index'
 import { connect, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import ProductCard from '../ProductCard/ProductCard'
+import ProductCard from '../../components/ProductCard/ProductCard'
 
 const Favorites = (props) => {
     const dispatch = useDispatch()

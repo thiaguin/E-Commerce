@@ -3,10 +3,10 @@ import classes from './Auth.module.css'
 import * as actions from '../../store/actions/index'
 import { connect } from 'react-redux'
 import background from '../../assets/e-commerce.png'
-import Spinner from '../Spinner/Spinner'
-import Aux from '../hoc/Aux'
+import Spinner from '../../components/Spinner/Spinner'
+import Aux from '../../components/hoc/Aux'
 import { Redirect } from 'react-router-dom'
-import Popup from '../Popup/Popup'
+import Popup from '../../components/Popup/Popup'
 
 const Auth = (props) => {
     const { onSetIsAuthPage } = props

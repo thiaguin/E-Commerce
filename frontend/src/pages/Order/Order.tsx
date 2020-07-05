@@ -3,8 +3,8 @@ import classes from './Order.module.css'
 import { connect } from 'react-redux'
 import { useHistory, Redirect } from 'react-router-dom'
 import * as actions from '../../store/actions/index'
-import Spinner from '../Spinner/Spinner'
-import Aux from '../hoc/Aux'
+import Spinner from '../../components/Spinner/Spinner'
+import Aux from '../../components/hoc/Aux'
 
 const Order = (props) => {
     const products = props.order?.products

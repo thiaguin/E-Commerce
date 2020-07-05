@@ -1,6 +1,6 @@
 import React from 'react'
 import crashSvg from '../../../assets/crash.svg'
-import Aux from '../../hoc/Aux'
+import Aux from '../../../components/hoc/Aux'
 import classes from './ProductCart.module.css'
 
 const ProductCart = (props) => {

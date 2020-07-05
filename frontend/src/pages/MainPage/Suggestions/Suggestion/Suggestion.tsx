@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import classes from './Suggestion.module.css'
-import ProductCard from '../../../ProductCard/ProductCard'
+import ProductCard from '../../../../components/ProductCard/ProductCard'
 import nextSvg from '../../../../assets/next.svg'
 import previousSvg from '../../../../assets/previous.svg'
 import NukaCarousel from 'nuka-carousel'

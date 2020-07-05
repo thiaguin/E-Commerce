@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import classes from './Filters.module.css'
 import Filter from './Filter/Filter'
 import FilterRating from './Filter/FilterRating'

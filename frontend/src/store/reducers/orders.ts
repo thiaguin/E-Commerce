@@ -1,5 +1,4 @@
 import * as actionTypes from '../actions/actionTypes'
-import { data } from 'jquery'
 
 const initialState = {
     datas: [],

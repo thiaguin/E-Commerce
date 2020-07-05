@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Select from 'react-select'
 import classes from './Products.module.css'
-import ProductCard from '../../ProductCard/ProductCard'
+import ProductCard from '../../../components/ProductCard/ProductCard'
 import Pagination from '../Pagination/Pagination'
 import * as actions from '../../../store/actions/index'
 import { connect, useDispatch } from 'react-redux'
-import Spinner from '../../Spinner/Spinner'
+import Spinner from '../../../components/Spinner/Spinner'
 
 const Products = (props) => {
     const dispatch = useDispatch()
