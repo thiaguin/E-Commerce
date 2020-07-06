@@ -27,8 +27,8 @@ const NavigationItems = (props) => {
     const navMultipleItemsWidth = ref?.current?.getBoundingClientRect()?.width
     const navMultipleItemsMargin = ref?.current?.getBoundingClientRect()?.x
 
-    const categoriesClickHandler = ({ query, isFac, ...item }) => {
-        if (isFac) return history.push('/contactus')
+    const categoriesClickHandler = ({ query, isAbout, ...item }) => {
+        if (isAbout) return history.push('/about')
 
         if (query && !query['order[field]']) {
             const result: { name: string; values: string[] }[] = []

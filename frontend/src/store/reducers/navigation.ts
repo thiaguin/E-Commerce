@@ -11,7 +11,7 @@ const initialState = {
         { name: 'Celular' },
         { name: 'Informática' },
         { name: 'Eletrodomésticos' },
-        { name: 'Fale Conosco', isFac: true },
+        { name: 'Sobre', isAbout: true },
     ],
     start: false,
     departmentCategories: [],

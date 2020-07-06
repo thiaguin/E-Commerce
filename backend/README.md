@@ -28,6 +28,13 @@ $ docker-compose up --no-start
 $ npm install
 ```
 
+### Restore database backup (Optional)
+
+```bash
+# To install dependecies
+$ cat backup.sql | docker exec -i e-postgres psql -U e-username -d test
+```
+
 ## Start database
 
 ```bash

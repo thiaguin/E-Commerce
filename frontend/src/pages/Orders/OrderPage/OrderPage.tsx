@@ -49,6 +49,18 @@ const OrderPage = (props) => {
         return result
     }
 
+    const getEvaluateMessage = (element) => {
+        const hasEvaluate = evaluateProduct?.filter((current) => {
+            return current.productId === element.productId && current.productOrderId === element.id
+        })
+
+        if (element.evaluate === 0 && !(hasEvaluate && hasEvaluate.length > 0)) {
+            return 'Avaliar'
+        }
+
+        return 'Sua Avaliação'
+    }
+
     const products = orderProduct.map((element, index) => {
         const product = element?.product
         const settings = ratingSettings(element)
@@ -70,7 +82,7 @@ const OrderPage = (props) => {
                     </h3>
                 </div>
                 <div className={classes.ProductEvaluate}>
-                    <h3>{element.evaluate === 0 ? 'Avaliar' : 'Sua Avaliação'}</h3>
+                    <h3>{getEvaluateMessage(element)}</h3>
                     <StarRatings {...settings} />
                 </div>
             </div>

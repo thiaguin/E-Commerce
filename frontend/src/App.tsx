@@ -15,6 +15,7 @@ import Success from './components/Success/Success'
 import Orders from './pages/Orders/Orders'
 import OrderPage from './pages/Orders/OrderPage/OrderPage'
 import Favorites from './pages/Favorites/Favorites'
+import About from './pages/About/About'
 
 const App = (props) => {
     const dispatch = useDispatch()
@@ -29,14 +30,7 @@ const App = (props) => {
             <Route path="/wishes" component={(props) => <Favorites {...props} />} />
             <Route path="/shopping" render={(props) => <ShoppingCart {...props} />} />
             <Route path="/auth" render={(props) => <Auth {...props} />} />
-            <Route
-                path="/contactus"
-                component={(props) => (
-                    <div>
-                        <h1>Contact us</h1>
-                    </div>
-                )}
-            />
+            <Route path="/about" render={(props) => <About {...props} />} />
             <Route path="/products/show/:id" render={(props) => <Product {...props} />} />
             <Route path="/products" render={(props) => <Search {...props} />} />
             <Route path="/" render={(props) => <MainPage {...props} />} />
@@ -48,14 +42,7 @@ const App = (props) => {
             <Switch>
                 <Route path="/wishes" component={(props) => <Favorites {...props} />} />
                 <Route path="/auth" render={(props) => <Auth {...props} />} />
-                <Route
-                    path="/contactus"
-                    component={(props) => (
-                        <div>
-                            <h1>Contact us</h1>
-                        </div>
-                    )}
-                />
+                <Route path="/about" render={(props) => <About {...props} />} />
                 <Route path="/orders/show/:id" render={(props) => <OrderPage {...props} />} />
                 <Route path="/orders" render={(props) => <Orders {...props} />} />
                 <Route path="/shopping/order/success" render={(props) => <Success {...props} />} />

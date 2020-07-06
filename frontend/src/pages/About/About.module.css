@@ -1,0 +1,83 @@
+.About {
+    margin-top: 115px;
+    margin: auto;
+}
+
+.About {
+    margin-top: 145px;
+    font-size: 2em;
+    margin-left: 45px;
+}
+
+.AboutCard {
+    width: 620px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: lightgrey;
+    padding: 30px 50px;
+    border: 1px solid dimgray;
+    border-radius: 0.2em;
+}
+
+.AboutCard h2 {
+    font-size: 0.8em;
+    text-align: justify;
+    text-justify: inter-word;
+    color: dimgray;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.Linkedin {
+    width: 360px;
+    margin: auto;
+}
+
+.Linkedin img {
+    vertical-align: middle;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 0.2em;
+}
+
+.Linkedin a {
+    display: inline-block;
+    font-size: 0.8em;
+    margin-left: 20px;
+    color: dimgray;
+    text-decoration: none;
+}
+
+.Linkedin a:hover {
+    text-decoration: underline;
+}
+
+.Github {
+    width: 360px;
+    margin: auto;
+    margin-top: 5px;
+}
+
+.Github img {
+    vertical-align: middle;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 0.4em;
+}
+
+.Github a {
+    display: inline-block;
+    font-size: 0.8em;
+    margin-left: 20px;
+    color: dimgray;
+    text-decoration: none;
+}
+
+.Github a:hover {
+    text-decoration: underline;
+}
