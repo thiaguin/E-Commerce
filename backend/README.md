@@ -3,6 +3,7 @@
 ## Description
 
 This is as basic project to improve my skills. It's an API to serve the frontend simulating an e-commerce website.
+<br/>
 The main tools used in this project:
 
 -   [Typescript](https://www.typescriptlang.org/): The language adopted
