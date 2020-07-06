@@ -3,6 +3,7 @@ import { CategoriesService } from './categories.service'
 import { CreateCategoryDTO } from './dto/create-categories.dto'
 import { Category } from './categories.entity'
 import { UpdateResult } from 'typeorm'
+import { Brand } from '../brands/brands.entity'
 
 @Controller('categories')
 export class CategoriesController {
@@ -15,6 +16,11 @@ export class CategoriesController {
     @Get()
     findAll(): Promise<Category[]> {
         return this.categoryService.findAll()
+    }
+
+    @Get('/brands/:id')
+    getBrands(@Param() params): Promise<Brand[]> {
+        return this.categoryService.getBrands(params)
     }
 
     @Post()

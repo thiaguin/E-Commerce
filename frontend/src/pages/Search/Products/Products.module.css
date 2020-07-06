@@ -1,0 +1,53 @@
+.Products {
+    display: inline-block;
+    vertical-align: top;
+    position: absolute;
+    min-width: 430px;
+    width: 80%;
+}
+
+.Products h4 {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 2em;
+    color: grey;
+    height: 30px;
+    margin-top: 18px;
+}
+
+.Products h5 {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+.Products p {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 10px;
+    margin-top: 35px;
+}
+
+.Products h6 {
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 1em;
+    vertical-align: top;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+    color: grey;
+}
+
+.Select {
+    display: inline-block;
+    margin-top: 10px;
+    width: 165px;
+}
+
+.SelectQuantity {
+    display: inline-block;
+    margin-top: 10px;
+    width: 80px;
+}

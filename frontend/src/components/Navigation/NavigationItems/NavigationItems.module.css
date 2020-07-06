@@ -1,0 +1,18 @@
+.NavigationItems {
+    box-sizing: border-box;
+    height: 35px;
+    text-align: inherit;
+    background-color: #56ccf2;
+    vertical-align: auto;
+    padding: 0 45px;
+    min-width: 800px;
+    -webkit-justify-content: space-around;
+    display: flex;
+    justify-content: space-around;
+}
+
+@media (max-width: 1100px) {
+    .NavigationItems {
+        padding: 0;
+    }
+}

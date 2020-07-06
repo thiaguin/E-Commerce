@@ -1,0 +1,12 @@
+.Search {
+    margin-top: 115px;
+    display: inline-block;
+    width: 100%;
+    min-width: 640px;
+}
+
+@media (min-width: 1500px) {
+    .Search {
+        margin-top: 145px;
+    }
+}

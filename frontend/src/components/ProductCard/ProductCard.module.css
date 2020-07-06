@@ -1,0 +1,70 @@
+.ProductCard {
+    position: relative;
+    margin: auto;
+    height: 250px;
+    width: 160px;
+    border: 1px solid #d9d9d9;
+    outline: hidden;
+    position: relative;
+    vertical-align: top;
+    text-align: center;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.ProductCard img {
+    padding-top: 8px;
+    text-align: center;
+    max-height: 60%;
+    width: 80%;
+}
+
+StarRating {
+    width: 50px;
+}
+
+.Full img {
+    padding-top: 15px;
+    padding-bottom: 5px;
+    text-align: center;
+    height: 45%;
+    width: 60%;
+}
+
+.ProductCard h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+    text-align: initial;
+    text-justify: inter-word;
+    padding: 0 10%;
+    font-size: 0.8em;
+    height: 3.5em;
+    color: ;
+}
+
+.ProductCard h2 {
+    margin: auto;
+    text-align: left;
+    font-size: 1em;
+    color: #404040;
+    width: 80%;
+}
+
+.ProductCard h3 {
+    margin: auto;
+    text-align: left;
+    color: #404040;
+    width: 80%;
+    font-size: 0.6em;
+    color: grey;
+    text-decoration: line-through;
+}
+
+.ProductCard:hover {
+    cursor: pointer;
+}

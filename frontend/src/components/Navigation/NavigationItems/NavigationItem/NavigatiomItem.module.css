@@ -1,0 +1,19 @@
+.NavigationItem {
+    display: inline-block;
+    color: grey;
+    vertical-align: middle;
+    padding: 5px 15px;
+}
+
+.NavigationItem:hover {
+    cursor: pointer;
+    background-color: grey;
+    color: #56ccf2;
+    border-radius: 0.3em 0.3em 0 0;
+}
+
+@media (max-width: 940px) {
+    .NavigationItem {
+        padding: 5px 5px;
+    }
+}

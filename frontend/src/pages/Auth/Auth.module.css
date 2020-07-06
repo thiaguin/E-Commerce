@@ -1,0 +1,78 @@
+.Auth {
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    background-color: honeydew;
+    position: relative;
+    top: 25%;
+    display: inline-block;
+    vertical-align: middle;
+    width: fit-content;
+    border: 3px solid silver;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    border-radius: 0.2em;
+}
+
+.Auth input {
+    display: block;
+    margin: auto;
+    width: 280px;
+    height: 25px;
+    margin-bottom: 7px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Signup {
+    margin-top: 5px;
+    margin-right: 25px;
+    width: 120px;
+    height: 25px;
+    background-color: seashell;
+    border: 1px solid grey;
+    color: gray;
+    font-size: 1em;
+    border-radius: 0.2em;
+}
+
+.Signup:hover {
+    cursor: pointer;
+    background-color: lightgray;
+    color: grey;
+}
+
+.Login {
+    margin-top: 5px;
+    margin-right: 0;
+    width: 120px;
+    height: 25px;
+    margin-left: 25px;
+    background-color: #56ccf2;
+    border: 1px solid grey;
+    color: gray;
+    font-size: 1em;
+    border-radius: 0.2em;
+}
+
+.Test {
+    margin-top: 5px;
+    margin-right: 0;
+    width: 10px;
+    height: 10px;
+    margin-left: 25px;
+}
+
+.Login:hover {
+    cursor: pointer;
+    background-color: #61dafb;
+    color: grey;
+}
+
+.Login:focus,
+.Signup:focus {
+    outline-color: grey;
+}
+
+.Auth input:focus {
+    outline-color: grey;
+}

@@ -15,9 +15,5 @@ const metadata: ModuleMetadata = {
 
 @Module(metadata)
 export class UsersModule implements NestModule {
-    public configure(consumer: MiddlewareConsumer) {
-        consumer
-            .apply(AuthenticateMiddleware, AuthorizeMiddleware)
-            .forRoutes({ path: 'users', method: RequestMethod.POST })
-    }
+    public configure(consumer: MiddlewareConsumer) {}
 }

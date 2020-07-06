@@ -28,9 +28,6 @@ export class Order {
     @Column('json')
     deliveryData: JSON
 
-    @Column({ nullable: false })
-    status: string
-
     @ManyToOne(() => User, (user) => user.id, { nullable: false })
     @JoinColumn()
     user: User

@@ -1,8 +1,9 @@
-import { Controller, Post, Body, Get, Put, Param, HttpCode } from '@nestjs/common'
+import { Controller, Post, Body, Get, Put, Param, HttpCode, Query } from '@nestjs/common'
 import { DepartmentsService } from './departments.service'
 import { CreateDepartmentDTO } from './dto/create-departments.dto'
 import { Department } from './departments.entity'
 import { UpdateResult } from 'typeorm'
+import { Brand } from 'src/brands/brands.entity'
 
 @Controller('departments')
 export class DepartmentsController {
@@ -13,8 +14,13 @@ export class DepartmentsController {
     }
 
     @Get()
-    findAll(): Promise<Department[]> {
-        return this.departamentService.findAll()
+    findAll(@Query() query): Promise<Department[]> {
+        return this.departamentService.findAll(query)
+    }
+
+    @Get('/brands/:id')
+    getBrands(@Param() params): Promise<Brand[]> {
+        return this.departamentService.getBrands(params)
     }
 
     @Post()

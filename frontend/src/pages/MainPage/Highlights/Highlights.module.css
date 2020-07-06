@@ -1,0 +1,7 @@
+.Highlights {
+    border-top: 1px solid grey;
+}
+
+.Highlight:hover {
+    cursor: pointer;
+}

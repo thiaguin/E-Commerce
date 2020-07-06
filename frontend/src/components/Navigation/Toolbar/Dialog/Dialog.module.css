@@ -1,0 +1,26 @@
+.Dialog {
+    display: inline-block;
+    margin: 0;
+    padding: 7px 10px 7px 15px;
+    border-radius: 0.3em;
+    margin: 10px;
+    vertical-align: middle;
+    border: 1px solid gainsboro;
+}
+
+h1 {
+    color: grey;
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.Dialog p {
+    color: gray;
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.Dialog p:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

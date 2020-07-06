@@ -1,14 +1,21 @@
 import { Injectable, HttpException } from '@nestjs/common'
-import { getManager, UpdateResult } from 'typeorm'
+import { getManager, UpdateResult, FindManyOptions } from 'typeorm'
 import { Department } from './departments.entity'
 import { CreateDepartmentDTO } from './dto/create-departments.dto'
 import { UpdateDepartmentDTO } from './dto/update-departments.dto'
+import { Brand } from 'src/brands/brands.entity'
+import { Product } from 'src/products/products.entity'
 
 @Injectable()
 export class DepartmentsService {
-    async findAll(): Promise<Department[]> {
+    async findAll(query): Promise<Department[]> {
         const departamentRepository = getManager().getRepository(Department)
-        return await departamentRepository.find({ relations: ['categories'] })
+        const findOptions: FindManyOptions<Department> = { order: { name: 'ASC' } }
+
+        if (query.relations) findOptions.relations = ['categories']
+        if (query.id) findOptions.where = { id: query.id }
+
+        return await departamentRepository.find(findOptions)
     }
 
     async create(body: CreateDepartmentDTO): Promise<Department> {
@@ -28,5 +35,14 @@ export class DepartmentsService {
         }
 
         throw new HttpException('NotFound', 404)
+    }
+
+    async getBrands(params: { id: number }): Promise<Brand[]> {
+        const product = getManager().createQueryBuilder(Product, 'p')
+        return await product
+            .select('DISTINCT b.id, b.name')
+            .innerJoin(Brand, 'b', 'b.id = p.brand')
+            .where(`p.department = ${params.id}`)
+            .getRawMany()
     }
 }

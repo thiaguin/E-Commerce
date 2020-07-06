@@ -1,0 +1,15 @@
+.ToolbarItem {
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.ToolbarItem:hover {
+    cursor: pointer;
+}
+
+.Car {
+    height: 38px;
+}

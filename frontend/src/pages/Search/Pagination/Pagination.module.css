@@ -1,0 +1,40 @@
+.Pagination {
+    position: relative;
+    text-align: center;
+    margin: auto;
+}
+
+.PageIcon {
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+}
+
+.PageIcon:hover {
+    cursor: pointer;
+}
+
+.Pagination h3 {
+    color: grey;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+    border: 1px solid grey;
+    margin: 10px 7px;
+    border-radius: 0.2em;
+    padding: 2px 5px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.Pagination h3:hover {
+    cursor: pointer;
+}
+
+.Selected {
+    color: grey;
+    cursor: pointer;
+    background-color: #56ccf2;
+    border: 1px solid grey;
+}

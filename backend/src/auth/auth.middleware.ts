@@ -24,3 +24,12 @@ export class AuthorizeMiddleware implements NestMiddleware {
         next()
     }
 }
+
+@Injectable()
+export class GetUserMiddleware implements NestMiddleware {
+    async use(req: Request, res: Response, next: () => void): Promise<void> {
+        const authService = new AuthService()
+        req.user = await authService.getUser(req.headers)
+        next()
+    }
+}

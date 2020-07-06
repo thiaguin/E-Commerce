@@ -1,6 +1,8 @@
 import { Injectable, HttpException } from '@nestjs/common'
 import { getManager, UpdateResult } from 'typeorm'
 import { Category } from './categories.entity'
+import { Product } from '../products/products.entity'
+import { Brand } from '../brands/brands.entity'
 import { CreateCategoryDTO } from './dto/create-categories.dto'
 import { UpdateCategoryDTO } from './dto/update-categories.dto'
 
@@ -28,5 +30,14 @@ export class CategoriesService {
         }
 
         throw new HttpException('NotFound', 404)
+    }
+
+    async getBrands(params: { id: number }): Promise<Brand[]> {
+        const product = getManager().createQueryBuilder(Product, 'p')
+        return await product
+            .select('DISTINCT b.id, b.name')
+            .innerJoin(Brand, 'b', 'b.id = p.brand')
+            .where(`p.category = ${params.id}`)
+            .getRawMany()
     }
 }

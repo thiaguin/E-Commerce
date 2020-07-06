@@ -17,7 +17,7 @@ export class Category {
     @Column()
     name: string
 
-    @ManyToOne(() => Department, (department) => department.id)
+    @ManyToOne(() => Department, (department) => department.id, { nullable: false })
     @JoinColumn()
     department: Department
 

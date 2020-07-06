@@ -1,0 +1,16 @@
+.Toolbar {
+    box-sizing: border-box;
+    background-color: #56ccf2;
+    padding-top: 10px;
+    min-width: 860px;
+    height: 80px;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+@media (min-width: 1700px) {
+    .Toolbar {
+        height: 110px;
+    }
+}

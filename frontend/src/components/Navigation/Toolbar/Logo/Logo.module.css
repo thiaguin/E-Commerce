@@ -1,0 +1,16 @@
+.Logo {
+    display: inline-block;
+    width: 150px;
+    padding-bottom: 8px;
+    vertical-align: middle;
+    margin-right: 20px;
+}
+
+.Logo:hover {
+    cursor: pointer;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
