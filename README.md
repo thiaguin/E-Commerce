@@ -2,6 +2,18 @@
 
 This is a simple project to improve my skills as a software developer, the project simulates an e-commerce website.
 
+## Backend
+
+You can find the backend configuration, how to install and the main tools used [here](/backend/README.md).
+
+## Frontend
+
+You can find the frontend configuration, how to install and the main tools used [here](/frontend/README.md).
+
+## Images
+
+You can find same prints of the project running [here](/prints)
+
 ## Project Description
 
 The mean features are:
@@ -40,18 +52,6 @@ The mean features are:
 -   Admin can add new product
 -   Admin can set products photos
 -   Admin can see all the orders
-
-## Backend
-
-You can find the backend configuration, how to install and the main tools used [here](/backend/README.md).
-
-## Frontend
-
-You can find the frontend configuration, how to install and the main tools used [here](/frontend/README.md).
-
-## Images
-
-You can find same prints of the project running [here](/prints)
 
 ## License
 
