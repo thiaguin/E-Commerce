@@ -33,7 +33,7 @@
     "react-responsive-carousel": "^3.2.7",
     "react-router-dom": "^5.2.0",
     "react-router-hash-link": "^1.2.2",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "react-select": "^3.1.0",
     "react-slick": "^0.26.1",
     "react-star-ratings": "^2.3.0",
