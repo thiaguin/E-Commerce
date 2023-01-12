@@ -26,7 +26,7 @@
         "@nestjs/platform-express": "^7.0.0",
         "@nestjs/typeorm": "^7.1.0",
         "bcrypt": "^4.0.1",
-        "class-validator": "^0.12.2",
+        "class-validator": "^0.14.0",
         "multer": "^1.4.2",
         "passport-jwt": "^4.0.0",
         "pg": "^8.2.1",
